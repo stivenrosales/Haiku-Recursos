@@ -98,9 +98,71 @@ La aplicación estará disponible en [http://localhost:3000](http://localhost:30
 
 ⚠️ **CAMBIAR en producción**
 
-## 🚢 Deployment
+## 🚢 Deployment en Vercel
 
-Ver el plan de implementación completo en [~/.claude/plans/floofy-growing-neumann.md](/Users/stivenkevinrosalescasas/.claude/plans/floofy-growing-neumann.md)
+### Configuración ISR (Incremental Static Regeneration)
+
+Este proyecto usa ISR para las rutas dinámicas (`/r/[slug]`), lo que significa:
+- Las páginas se generan automáticamente la primera vez que alguien las visita
+- Se revalidan cada 60 segundos para mantener el contenido actualizado
+- Las primeras 50 páginas de recursos activos se pre-generan en build time
+
+### Pasos para deployar:
+
+**1. Preparar variables de entorno:**
+
+Asegúrate de tener estas variables configuradas en Vercel:
+
+```env
+DATABASE_URL=             # Tu connection string de Neon (producción)
+NEXTAUTH_URL=             # https://tu-dominio.vercel.app
+NEXTAUTH_SECRET=          # Genera uno nuevo: openssl rand -base64 32
+RESEND_API_KEY=           # Tu API key de Resend
+RESEND_FROM_EMAIL=        # Tu email verificado (ej: recursos@tudominio.com)
+NEXT_PUBLIC_APP_URL=      # https://tu-dominio.vercel.app
+```
+
+**2. Deploy desde Vercel:**
+
+```bash
+# Opción A: CLI de Vercel
+npm install -g vercel
+vercel
+
+# Opción B: Desde GitHub
+# 1. Ve a vercel.com
+# 2. Importa este repositorio
+# 3. Configura las variables de entorno
+# 4. Deploy automático
+```
+
+**3. Después del deploy:**
+
+Las migraciones de Prisma se aplicarán automáticamente durante el build gracias al script `prisma generate` en `package.json`.
+
+**4. Verificar dominio en Resend:**
+
+Para envío de emails en producción:
+1. Ve a Resend → Domains
+2. Agrega tu dominio
+3. Configura registros DNS (SPF, DKIM, DMARC)
+4. Verifica el dominio
+5. Actualiza `RESEND_FROM_EMAIL` con tu dominio verificado
+
+### Troubleshooting
+
+**Error de conexión a BD:**
+- Verifica que `DATABASE_URL` incluya `?sslmode=require` al final
+- Usa el connection string de Neon para producción
+
+**Recursos nuevos no aparecen:**
+- Espera 60 segundos (tiempo de revalidación ISR)
+- O visita la URL directamente para forzar generación
+
+**Emails no se envían:**
+- Verifica API key de Resend
+- Asegura que `RESEND_FROM_EMAIL` esté verificado
+- Para pruebas, usa `onboarding@resend.dev`
 
 ## 📝 Scripts Disponibles
 
@@ -116,8 +178,9 @@ npm run db:studio    # Prisma Studio (GUI)
 
 ## 🎨 Colores de Marca
 
-- **Verde Menta**: `#72e3ad`
+- **Verde Haiku**: `#00A86B`
 - **Negro**: `#171717`
+- **Beige**: `#FAF9F6`
 
 ## 📧 Contacto
 
