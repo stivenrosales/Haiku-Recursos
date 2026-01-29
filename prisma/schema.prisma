@@ -1,0 +1,66 @@
+// Prisma Schema para Haiku Business Landing Pages
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Recurso {
+  id            String   @id @default(cuid())
+  titulo        String
+  slug          String   @unique
+  descripcion   String
+  urlRecurso    String
+  imagenUrl     String?
+  emailAsunto   String
+  emailCuerpo   String
+  activo        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  leads         Lead[]
+
+  @@index([slug])
+  @@index([activo])
+}
+
+model Lead {
+  id            String   @id @default(cuid())
+  nombre        String
+  email         String
+  whatsapp      String
+  recursoId     String?
+  recurso       Recurso? @relation(fields: [recursoId], references: [id], onDelete: SetNull)
+  emailEnviado  Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  emailLogs     EmailLog[]
+
+  @@index([recursoId])
+  @@index([email])
+  @@index([createdAt])
+}
+
+model EmailLog {
+  id            String   @id @default(cuid())
+  leadId        String
+  lead          Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  asunto        String
+  cuerpo        String
+  enviado       Boolean  @default(false)
+  error         String?
+  createdAt     DateTime @default(now())
+
+  @@index([leadId])
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  name          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
