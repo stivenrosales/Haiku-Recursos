@@ -180,8 +180,8 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contacto" className="py-14 lg:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+    <section id="contacto" className="py-14 lg:py-20 px-5 sm:px-6 lg:px-0">
+      <div className="max-w-7xl mx-auto lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Text */}
           <AnimatedSection direction="up">
@@ -215,7 +215,7 @@ export function ContactForm() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="bg-white rounded-[24px] p-6 sm:p-8 lg:p-10 shadow-lg space-y-4"
+              className="bg-white rounded-2xl sm:rounded-[24px] p-5 sm:p-8 lg:p-10 shadow-lg space-y-4"
             >
               {/* Nombre */}
               <div>
