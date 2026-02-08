@@ -63,7 +63,7 @@ export function ResourcesShowcase({ recursos }: ResourcesShowcaseProps) {
   }
 
   return (
-    <section id="recursos" className="py-14 lg:py-20">
+    <section id="recursos" className="py-14 lg:py-20 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         {/* Header */}
         <AnimatedSection className="text-center mb-10">

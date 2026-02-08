@@ -180,7 +180,7 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contacto" className="py-14 lg:py-20">
+    <section id="contacto" className="py-14 lg:py-20 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Text */}
@@ -272,7 +272,7 @@ export function ContactForm() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute top-full left-0 mt-1 w-72 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden"
+                          className="absolute top-full left-0 mt-1 w-[calc(100vw-4rem)] sm:w-72 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden"
                         >
                           {/* Search input */}
                           <div className="sticky top-0 bg-white border-b border-gray-100 p-2">
