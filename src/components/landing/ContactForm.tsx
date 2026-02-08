@@ -181,10 +181,10 @@ export function ContactForm() {
 
   return (
     <section id="contacto" className="py-14 lg:py-20">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Text */}
-          <AnimatedSection direction="left">
+          <AnimatedSection direction="up">
             <p className="text-sm font-semibold tracking-widest text-haiku-mint uppercase mb-3">
               Contacto
             </p>
@@ -211,11 +211,11 @@ export function ContactForm() {
           </AnimatedSection>
 
           {/* Right - Form */}
-          <AnimatedSection direction="right">
+          <AnimatedSection direction="up" delay={0.15}>
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="bg-white rounded-[24px] p-8 lg:p-10 shadow-lg space-y-4"
+              className="bg-white rounded-[24px] p-6 sm:p-8 lg:p-10 shadow-lg space-y-4"
             >
               {/* Nombre */}
               <div>
