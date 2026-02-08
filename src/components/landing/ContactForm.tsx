@@ -155,7 +155,7 @@ export function ContactForm() {
   };
 
   const inputClass = (field: string) =>
-    `w-full px-6 py-4 border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-haiku-mint focus:border-haiku-mint bg-white text-gray-700 placeholder:text-gray-400 ${
+    `w-full px-4 sm:px-6 py-3.5 sm:py-4 border rounded-xl text-base focus:outline-none focus:ring-2 focus:ring-haiku-mint focus:border-haiku-mint bg-white text-gray-700 placeholder:text-gray-400 ${
       errors[field] ? 'border-red-400' : 'border-gray-300'
     }`;
 
@@ -180,7 +180,7 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contacto" className="py-14 lg:py-20 overflow-x-hidden">
+    <section id="contacto" className="py-14 lg:py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Text */}
@@ -215,7 +215,7 @@ export function ContactForm() {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="bg-white rounded-2xl sm:rounded-[24px] p-4 sm:p-8 lg:p-10 border border-gray-100 sm:border-0 sm:shadow-lg space-y-4"
+              className="sm:bg-white sm:rounded-[24px] sm:p-8 lg:p-10 sm:shadow-lg space-y-4"
             >
               {/* Nombre */}
               <div>
@@ -323,7 +323,7 @@ export function ContactForm() {
                     value={formData.whatsapp}
                     onChange={(e) => handlePhoneChange(e.target.value)}
                     placeholder={selectedCountry.placeholder}
-                    className="flex-1 px-4 py-4 text-base focus:outline-none bg-white text-gray-700 placeholder:text-gray-400 rounded-r-xl"
+                    className="flex-1 px-3 sm:px-4 py-3.5 sm:py-4 text-base focus:outline-none bg-white text-gray-700 placeholder:text-gray-400 rounded-r-xl"
                   />
                 </div>
                 {errors.whatsapp && (
@@ -358,7 +358,7 @@ export function ContactForm() {
               <motion.button
                 type="submit"
                 disabled={loading}
-                className="w-full px-8 py-4 bg-haiku-mint text-white font-semibold rounded-full hover:bg-[#009160] transition-colors text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full px-6 sm:px-8 py-3.5 sm:py-4 bg-haiku-mint text-white font-semibold rounded-full hover:bg-[#009160] transition-colors text-base sm:text-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
