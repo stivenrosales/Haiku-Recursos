@@ -101,7 +101,7 @@ export const RecursoEmail = ({
           </table>
 
           <Text style={copyright}>
-            © 2025 Haiku Business
+            © 2026 Haiku Business
           </Text>
         </Section>
       </Container>

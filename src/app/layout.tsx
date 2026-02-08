@@ -1,10 +1,26 @@
 import type { Metadata } from 'next';
+import { Space_Grotesk, Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import './globals.css';
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Haiku Business - Automatiza tu negocio',
-  description: 'Sistema de landing pages y captura de leads para Haiku Business',
+  title: {
+    default: 'Haiku — Automatización e IA para Negocios',
+    template: '%s | Haiku Business',
+  },
+  description: 'Recursos gratuitos, automatización e IA para tu negocio. Descarga guías y herramientas gratis.',
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
@@ -19,7 +35,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body>
+      <body className={`${spaceGrotesk.variable} ${inter.variable} font-body`}>
         {children}
         <Toaster />
       </body>

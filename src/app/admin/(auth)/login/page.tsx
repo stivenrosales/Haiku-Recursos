@@ -87,7 +87,7 @@ export default function LoginPage() {
           </form>
         </div>
         <p className="text-center text-sm text-gray-500 mt-6">
-          © 2025 Haiku Business
+          © 2026 Haiku Business
         </p>
       </div>
     </div>

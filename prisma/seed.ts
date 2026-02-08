@@ -30,7 +30,7 @@ async function main() {
       slug: 'guia-automatizacion',
       descripcion: 'Descubre cómo automatizar tus procesos empresariales usando inteligencia artificial y herramientas no-code.',
       urlRecurso: 'https://drive.google.com/file/d/ejemplo',
-      imagenUrl: null,
+      icono: 'Bot',
       emailAsunto: '¡Tu Guía de Automatización está lista! 🎁',
       emailCuerpo: 'Hola {{nombre}},\n\nGracias por tu interés en automatización. Aquí está tu guía:\n\n👉 [DESCARGAR GUÍA]({{urlRecurso}})\n\n¡Éxito!\nStiven - Haiku Business',
       activo: true,

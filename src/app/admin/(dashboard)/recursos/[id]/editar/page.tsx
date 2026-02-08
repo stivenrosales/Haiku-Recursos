@@ -11,6 +11,7 @@ import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import Link from 'next/link';
+import { IconPicker } from '@/components/admin/IconPicker';
 
 export default function EditarRecursoPage() {
   const router = useRouter();
@@ -23,7 +24,7 @@ export default function EditarRecursoPage() {
     slug: '',
     descripcion: '',
     urlRecurso: '',
-    imagenUrl: '',
+    icono: '',
     emailAsunto: '',
     emailCuerpo: '',
     activo: true,
@@ -46,7 +47,7 @@ export default function EditarRecursoPage() {
           slug: recurso.slug,
           descripcion: recurso.descripcion,
           urlRecurso: recurso.urlRecurso,
-          imagenUrl: recurso.imagenUrl || '',
+          icono: recurso.icono || '',
           emailAsunto: recurso.emailAsunto,
           emailCuerpo: recurso.emailCuerpo,
           activo: recurso.activo,
@@ -192,16 +193,11 @@ export default function EditarRecursoPage() {
           </div>
 
           <div>
-            <Label htmlFor="imagenUrl" className="text-sm font-medium text-gray-700">URL de Imagen (opcional)</Label>
-            <Input
-              id="imagenUrl"
-              type="url"
-              value={formData.imagenUrl}
-              onChange={(e) =>
-                setFormData({ ...formData, imagenUrl: e.target.value })
-              }
-              placeholder="https://..."
-              className="mt-1 border-gray-300 focus:border-[#00A86B] focus:ring-[#00A86B]"
+            <Label className="text-sm font-medium text-gray-700">Ícono del recurso</Label>
+            <p className="text-sm text-gray-500 mt-1 mb-3">Selecciona un ícono para la card del recurso</p>
+            <IconPicker
+              value={formData.icono}
+              onChange={(icon) => setFormData({ ...formData, icono: icon })}
             />
           </div>
 

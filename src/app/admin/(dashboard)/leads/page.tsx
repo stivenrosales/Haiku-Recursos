@@ -5,21 +5,24 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Download, Search } from 'lucide-react';
+import { Download, Search, Filter } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function LeadsPage() {
   const [leads, setLeads] = useState<any[]>([]);
   const [search, setSearch] = useState('');
+  const [uniqueOnly, setUniqueOnly] = useState(true);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
-  const fetchLeads = async (searchTerm?: string) => {
+  const fetchLeads = async (searchTerm?: string, unique?: boolean) => {
     try {
       setLoading(true);
       const params = new URLSearchParams();
       const term = searchTerm !== undefined ? searchTerm : search;
       if (term) params.set('search', term);
+      const isUnique = unique !== undefined ? unique : uniqueOnly;
+      if (isUnique) params.set('unique', 'true');
 
       const response = await fetch(`/api/admin/leads?${params}`);
       const data = await response.json();
@@ -75,7 +78,7 @@ export default function LeadsPage() {
         </Button>
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row gap-4">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <Input
@@ -86,10 +89,31 @@ export default function LeadsPage() {
             className="pl-10 border-gray-300 focus:border-[#00A86B] focus:ring-[#00A86B] rounded-full"
           />
         </div>
+        <button
+          onClick={() => {
+            const next = !uniqueOnly;
+            setUniqueOnly(next);
+            fetchLeads(search, next);
+          }}
+          className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium border transition-all ${
+            uniqueOnly
+              ? 'bg-[#00A86B]/10 text-[#00A86B] border-[#00A86B]/30'
+              : 'bg-white text-gray-600 border-gray-300 hover:border-gray-400'
+          }`}
+        >
+          <Filter className="w-4 h-4" />
+          {uniqueOnly ? 'Únicos' : 'Todos'}
+        </button>
         <Button onClick={() => fetchLeads(search)} className="bg-[#00A86B] text-white hover:bg-[#009160] rounded-full font-semibold px-6">
           Buscar
         </Button>
       </div>
+
+      {!loading && (
+        <p className="text-sm text-gray-500">
+          {leads.length} {uniqueOnly ? 'leads únicos' : 'leads en total'}
+        </p>
+      )}
 
       <div className="bg-white border border-gray-200 rounded-[24px] shadow-sm overflow-hidden">
         <Table>

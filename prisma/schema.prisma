@@ -15,7 +15,7 @@ model Recurso {
   slug          String   @unique
   descripcion   String
   urlRecurso    String
-  imagenUrl     String?
+  icono         String?
   emailAsunto   String
   emailCuerpo   String
   activo        Boolean  @default(true)
@@ -54,6 +54,19 @@ model EmailLog {
   createdAt     DateTime @default(now())
 
   @@index([leadId])
+}
+
+model Contacto {
+  id            String   @id @default(cuid())
+  nombre        String
+  email         String
+  whatsapp      String?
+  mensaje       String
+  leido         Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  @@index([email])
+  @@index([createdAt])
 }
 
 model User {

@@ -13,11 +13,12 @@ export async function GET(req: NextRequest) {
     const recursoId = searchParams.get('recursoId');
     const emailEnviado = searchParams.get('emailEnviado');
     const search = searchParams.get('search');
+    const unique = searchParams.get('unique');
 
     const where: any = {};
 
     if (recursoId) where.recursoId = recursoId;
-    if (emailEnviado !== null) where.emailEnviado = emailEnviado === 'true';
+    if (emailEnviado !== null && emailEnviado !== undefined) where.emailEnviado = emailEnviado === 'true';
     if (search) {
       where.OR = [
         { nombre: { contains: search, mode: 'insensitive' } },
@@ -26,7 +27,7 @@ export async function GET(req: NextRequest) {
       ];
     }
 
-    const leads = await prisma.lead.findMany({
+    const allLeads = await prisma.lead.findMany({
       where,
       orderBy: { createdAt: 'desc' },
       include: {
@@ -34,7 +35,19 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(leads);
+    // Si unique=true, filtrar para mostrar solo el lead más reciente por email
+    if (unique === 'true') {
+      const seen = new Set<string>();
+      const uniqueLeads = allLeads.filter((lead) => {
+        const key = lead.email.toLowerCase();
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+      return NextResponse.json(uniqueLeads);
+    }
+
+    return NextResponse.json(allLeads);
   } catch (error) {
     console.error('Error fetching leads:', error);
     return NextResponse.json(

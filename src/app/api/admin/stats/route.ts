@@ -15,6 +15,7 @@ export async function GET() {
       totalLeads,
       leadsHoy,
       emailsEnviados,
+      uniqueEmails,
     ] = await Promise.all([
       prisma.recurso.count(),
       prisma.recurso.count({ where: { activo: true } }),
@@ -27,12 +28,14 @@ export async function GET() {
         },
       }),
       prisma.lead.count({ where: { emailEnviado: true } }),
+      prisma.lead.groupBy({ by: ['email'] }).then((groups) => groups.length),
     ]);
 
     return NextResponse.json({
       totalRecursos,
       recursosActivos,
       totalLeads,
+      uniqueLeads: uniqueEmails,
       leadsHoy,
       emailsEnviados,
     });

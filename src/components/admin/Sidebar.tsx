@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FileText, Users, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, Users, MessageSquare, LogOut } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { Button } from '@/components/ui/button';
 
@@ -10,6 +10,7 @@ const navigation = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Recursos', href: '/admin/recursos', icon: FileText },
   { name: 'Leads', href: '/admin/leads', icon: Users },
+  { name: 'Contactos', href: '/admin/contactos', icon: MessageSquare },
 ];
 
 export function Sidebar() {

@@ -17,15 +17,11 @@ export const recursoSchema = z.object({
     .string()
     .min(10, 'La descripción debe tener al menos 10 caracteres'),
   urlRecurso: z.string().url('URL inválida'),
-  imagenUrl: z
+  icono: z
     .string()
     .optional()
     .nullable()
-    .transform((val) => (!val || val === '' || val === 'https://...' ? null : val))
-    .refine(
-      (val) => !val || z.string().url().safeParse(val).success,
-      'URL de imagen inválida'
-    ),
+    .transform((val) => (!val || val === '' ? null : val)),
   emailAsunto: z
     .string()
     .min(5, 'El asunto debe tener al menos 5 caracteres'),

@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { LeadForm } from '@/components/landing/LeadForm';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // ISR: Revalidar cada 60 segundos
 export const revalidate = 60;
@@ -57,11 +58,21 @@ export default async function RecursoPage({ params }: PageProps) {
       {/* Layout estilo Ali Abdaal con bordes redondeados */}
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
 
-        {/* Logo arriba a la izquierda */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900">
-            Haiku Business
-          </h2>
+        {/* Header - Logo izquierda, link derecha */}
+        <div className="flex items-center justify-between mb-8">
+          <Link href="/" className="inline-flex items-center gap-2 group">
+            <span className="text-haiku-mint opacity-0 group-hover:opacity-100 transition-opacity duration-200">←</span>
+            <h2 className="text-2xl font-bold text-gray-900 group-hover:text-haiku-mint transition-colors">
+              Haiku Business
+            </h2>
+          </Link>
+          <Link
+            href="/#recursos"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-medium text-haiku-mint border border-haiku-mint/30 rounded-full hover:bg-haiku-mint hover:text-white transition-all duration-200"
+          >
+            Ver más recursos
+            <span className="text-base">→</span>
+          </Link>
         </div>
 
         {/* Contenedor principal con fondo blanco y bordes redondeados como Ali Abdaal */}
@@ -177,7 +188,10 @@ export default async function RecursoPage({ params }: PageProps) {
 
           {/* Copyright */}
           <div className="text-center text-sm text-gray-500">
-            © 2025 Haiku Business · Automatización e IA para negocios
+            <Link href="/" className="hover:text-haiku-mint transition-colors">
+              © 2026 Haiku Business
+            </Link>
+            {' '}· Automatización e IA para negocios
           </div>
         </div>
       </div>

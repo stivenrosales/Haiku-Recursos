@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { FileText, Users, Mail, TrendingUp } from 'lucide-react';
+import { FileText, Users, Mail, MessageSquare } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 
 async function getStats() {
   try {
-    const [totalRecursos, recursosActivos, totalLeads, leadsHoy, emailsEnviados] = await Promise.all([
+    const [totalRecursos, recursosActivos, totalLeads, leadsHoy, emailsEnviados, uniqueEmails, totalContactos, contactosNoLeidos] = await Promise.all([
       prisma.recurso.count(),
       prisma.recurso.count({ where: { activo: true } }),
       prisma.lead.count(),
@@ -12,14 +12,20 @@ async function getStats() {
         where: { createdAt: { gte: new Date(new Date().setHours(0, 0, 0, 0)) } },
       }),
       prisma.lead.count({ where: { emailEnviado: true } }),
+      prisma.lead.groupBy({ by: ['email'] }).then((groups) => groups.length),
+      prisma.contacto.count(),
+      prisma.contacto.count({ where: { leido: false } }),
     ]);
 
     return {
       totalRecursos,
       recursosActivos,
       totalLeads,
+      uniqueLeads: uniqueEmails,
       leadsHoy,
       emailsEnviados,
+      totalContactos,
+      contactosNoLeidos,
     };
   } catch (error) {
     console.error('Error fetching stats:', error);
@@ -27,8 +33,11 @@ async function getStats() {
       totalRecursos: 0,
       recursosActivos: 0,
       totalLeads: 0,
+      uniqueLeads: 0,
       leadsHoy: 0,
       emailsEnviados: 0,
+      totalContactos: 0,
+      contactosNoLeidos: 0,
     };
   }
 }
@@ -67,8 +76,8 @@ export default async function AdminDashboard() {
             <Users className="w-5 h-5 text-[#00A86B]" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-gray-900">{stats.totalLeads}</div>
-            <p className="text-xs text-gray-500 mt-1">{stats.leadsHoy} hoy</p>
+            <div className="text-3xl font-bold text-gray-900">{stats.uniqueLeads}</div>
+            <p className="text-xs text-gray-500 mt-1">{stats.totalLeads} total &middot; {stats.leadsHoy} hoy</p>
           </CardContent>
         </Card>
 
@@ -88,18 +97,17 @@ export default async function AdminDashboard() {
         <Card className="rounded-[24px] border-gray-200 shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium text-gray-600">
-              Tasa Email
+              Contactos
             </CardTitle>
-            <TrendingUp className="w-5 h-5 text-[#00A86B]" />
+            <MessageSquare className="w-5 h-5 text-[#00A86B]" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-gray-900">
-              {stats.totalLeads > 0
-                ? ((stats.emailsEnviados / stats.totalLeads) * 100).toFixed(1)
-                : 0}
-              %
-            </div>
-            <p className="text-xs text-gray-500 mt-1">de leads</p>
+            <div className="text-3xl font-bold text-gray-900">{stats.totalContactos}</div>
+            <p className="text-xs text-gray-500 mt-1">
+              {stats.contactosNoLeidos > 0
+                ? `${stats.contactosNoLeidos} sin leer`
+                : 'todos leídos'}
+            </p>
           </CardContent>
         </Card>
       </div>
