@@ -68,7 +68,7 @@ export default async function HomePage() {
   });
 
   return (
-    <div className="min-h-screen bg-haiku-beige overflow-x-hidden">
+    <div className="min-h-screen bg-haiku-beige">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
