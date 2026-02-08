@@ -180,8 +180,8 @@ export function ContactForm() {
   }
 
   return (
-    <section id="contacto" className="py-14 lg:py-20 px-5 sm:px-6 lg:px-0">
-      <div className="max-w-7xl mx-auto lg:px-12">
+    <section id="contacto" className="py-14 lg:py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left - Text */}
           <AnimatedSection direction="up">
