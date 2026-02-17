@@ -8,15 +8,15 @@ import { AnimatedSection } from './AnimatedSection';
 const faqs = [
   {
     question: '¿Cómo funciona el agente IA de ventas?',
-    answer: 'Es un asistente inteligente que se conecta a tus canales (WhatsApp, Instagram, Messenger) y atiende a tus clientes automáticamente. Responde preguntas, califica leads, envía información de pago y confirma transacciones. Todo sin que tengas que intervenir.',
+    answer: 'Es un bot de WhatsApp con inteligencia artificial que atiende a tus clientes automáticamente. Responde preguntas, califica leads, agenda citas, envía información de pago y confirma transacciones. Todo sin que tengas que intervenir.',
   },
   {
-    question: '¿En qué canales opera el agente?',
-    answer: 'Actualmente opera en WhatsApp, Instagram DM y Facebook Messenger. Un solo agente maneja todos los canales de forma unificada, con el mismo tono y conocimiento de tu negocio.',
+    question: '¿En qué canal opera el bot?',
+    answer: 'Opera directamente en WhatsApp, el canal donde ya están tus clientes. Se conecta a tu número de WhatsApp Business y atiende conversaciones con el tono y conocimiento de tu negocio.',
   },
   {
     question: '¿Qué tipo de negocios pueden usarlo?',
-    answer: 'Negocios de servicios digitales: agencias, consultorías, coaches, freelancers, SaaS y cualquier negocio que venda servicios y reciba consultas por redes sociales o WhatsApp. Si tus clientes te escriben antes de comprar, el agente es para ti.',
+    answer: 'Negocios de servicios digitales: agencias, consultorías, coaches, freelancers, SaaS y cualquier negocio que venda servicios y reciba consultas por WhatsApp. Si tus clientes te escriben antes de comprar, el agente es para ti.',
   },
   {
     question: '¿Cuánto tiempo tarda en implementarse?',

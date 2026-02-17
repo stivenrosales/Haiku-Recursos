@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { AnimatedSection } from './AnimatedSection';
 import { motion, AnimatePresence, useReducedMotion, useInView } from 'motion/react';
-import { MessageCircle, Clock, TrendingUp, Bot, CheckCircle, DollarSign, ImageIcon, Zap } from 'lucide-react';
+import { MessageCircle, Clock, TrendingUp, Bot, CheckCircle, DollarSign, ImageIcon, Zap, BarChart3, CalendarCheck, Rocket } from 'lucide-react';
 
 // --- Chat sequence types ---
 type ChatStep =
@@ -20,9 +20,9 @@ const chatSteps: ChatStep[] = [
   { type: 'message', from: 'client', text: 'Hola, quisiera información sobre sus servicios', delay: 800, time: '10:24' },
   { type: 'typing', duration: 1400 },
   { type: 'message', from: 'agent', text: '¡Hola! Claro, tenemos planes personalizados para tu negocio. ¿En qué área necesitas ayuda?', time: '10:24' },
-  { type: 'message', from: 'client', text: 'Marketing digital. ¿Cuánto cuesta?', delay: 1800, time: '10:25' },
+  { type: 'message', from: 'client', text: 'Consultoría de ventas. ¿Cuánto cuesta?', delay: 1800, time: '10:25' },
   { type: 'typing', duration: 1200 },
-  { type: 'message', from: 'agent', text: 'Para marketing digital tenemos un plan desde $297/mes con atención 24/7 y reportes.', time: '10:25' },
+  { type: 'message', from: 'agent', text: 'Tenemos el Plan Pro desde S/ 597/mes con atención 24/7, CRM y dashboard de métricas.', time: '10:25' },
   { type: 'message', from: 'client', text: 'Genial, quiero contratar', delay: 1600, time: '10:26' },
   { type: 'typing', duration: 1000 },
   { type: 'message', from: 'agent', text: 'Perfecto, te paso los datos para el pago:', time: '10:26' },
@@ -30,36 +30,36 @@ const chatSteps: ChatStep[] = [
   { type: 'message', from: 'client', text: 'Listo, ya transferí. Te envío el comprobante:', delay: 2200, time: '10:31' },
   { type: 'voucher', time: '10:31' },
   { type: 'typing', duration: 1200 },
-  { type: 'message', from: 'agent', text: '¡Recibido! Tu servicio se activa en las próximas 24 horas. ¡Bienvenido!', time: '10:31' },
+  { type: 'message', from: 'agent', text: '¡Recibido! Tu plan se activa en las próximas 24 horas. ¡Bienvenido!', time: '10:31' },
   { type: 'switch-to-notifications' },
 ];
 
 // --- Notification data for the second screen ---
 const notifications = [
-  { name: 'María G.', amount: '$297', time: 'hace 2 min', service: 'Marketing Digital' },
-  { name: 'Carlos R.', amount: '$497', time: 'hace 8 min', service: 'Automatización CRM' },
-  { name: 'Ana L.', amount: '$297', time: 'hace 15 min', service: 'Marketing Digital' },
-  { name: 'Pedro M.', amount: '$797', time: 'hace 23 min', service: 'Suite Completa' },
-  { name: 'Laura S.', amount: '$297', time: 'hace 31 min', service: 'Marketing Digital' },
-  { name: 'Diego F.', amount: '$497', time: 'hace 45 min', service: 'Automatización CRM' },
-  { name: 'Sofía V.', amount: '$297', time: 'hace 1h', service: 'Marketing Digital' },
+  { name: 'María G.', amount: 'S/ 597', time: 'hace 2 min', service: 'Plan Pro' },
+  { name: 'Carlos R.', amount: 'S/ 1,097', time: 'hace 8 min', service: 'Plan Scale' },
+  { name: 'Ana L.', amount: 'S/ 597', time: 'hace 15 min', service: 'Plan Pro' },
+  { name: 'Pedro M.', amount: 'S/ 1,097', time: 'hace 23 min', service: 'Plan Scale' },
+  { name: 'Laura S.', amount: 'S/ 597', time: 'hace 31 min', service: 'Plan Pro' },
+  { name: 'Diego F.', amount: 'S/ 1,097', time: 'hace 45 min', service: 'Plan Scale' },
+  { name: 'Sofía V.', amount: 'S/ 597', time: 'hace 1h', service: 'Plan Pro' },
 ];
 
 const features = [
   {
-    icon: MessageCircle,
-    title: 'Multi-canal',
-    description: 'WhatsApp, Instagram y Messenger en un solo agente.',
-  },
-  {
     icon: Clock,
-    title: 'Disponible 24/7',
-    description: 'Atiende clientes mientras duermes. Sin pausas.',
+    title: 'Atiende y vende 24/7',
+    description: 'Responde en segundos, agenda citas y registra cada lead en tu CRM. Automático.',
   },
   {
-    icon: TrendingUp,
-    title: 'Más conversiones',
-    description: 'Respuesta inmediata = más ventas cerradas.',
+    icon: BarChart3,
+    title: 'Tu propio dashboard',
+    description: 'Métricas en tiempo real: conversaciones, leads, ventas y rendimiento de tu bot.',
+  },
+  {
+    icon: Rocket,
+    title: 'Listo en 1 semana',
+    description: 'Configuramos todo por ti. En 7 días tu WhatsApp ya está vendiendo solo.',
   },
 ];
 
@@ -72,27 +72,6 @@ function WhatsAppIcon() {
   );
 }
 
-function InstagramIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-    </svg>
-  );
-}
-
-function MessengerIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
-      <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.654V24l4.088-2.242c1.092.3 2.246.464 3.443.464 6.627 0 12-4.975 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8.2l3.131 3.259L19.752 8.2l-6.561 6.763z" />
-    </svg>
-  );
-}
-
-const channels = [
-  { name: 'WhatsApp', icon: WhatsAppIcon },
-  { name: 'Instagram', icon: InstagramIcon },
-  { name: 'Messenger', icon: MessengerIcon },
-];
 
 // --- Sub-components ---
 
@@ -149,7 +128,7 @@ function AccountCard() {
           </div>
           <div className="flex justify-between border-t border-white/10 pt-1.5 mt-1">
             <span className="text-white/40 text-[11px]">Monto</span>
-            <span className="text-haiku-mint text-sm font-bold">$297.00</span>
+            <span className="text-haiku-mint text-sm font-bold">S/ 597.00</span>
           </div>
         </div>
       </div>
@@ -497,10 +476,10 @@ export function AgentSection() {
                 Producto Estrella
               </p>
               <h2 className="font-display text-4xl lg:text-5xl font-bold text-white leading-[1.1] mb-5">
-                Tu agente de IA que vende por ti, 24/7
+                Tu WhatsApp atiende, vende y cierra por ti
               </h2>
               <p className="text-lg text-white/60 leading-relaxed mb-8 max-w-lg">
-                Un asistente inteligente que atiende, califica y convierte clientes potenciales en todos tus canales. Mientras tú te enfocas en entregar tu servicio.
+                Un bot con IA que responde 24/7, agenda citas en Google Calendar, registra leads en tu CRM y te muestra todo en un dashboard propio. Listo en 1 semana.
               </p>
             </AnimatedSection>
 
@@ -523,29 +502,23 @@ export function AgentSection() {
               ))}
             </div>
 
-            {/* Channel badges */}
-            <AnimatedSection delay={0.3}>
-              <div className="flex flex-wrap items-center gap-2 mb-8">
-                {channels.map((channel) => (
-                  <span
-                    key={channel.name}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/5 border border-white/10 text-white/70 text-xs font-medium rounded-full"
-                  >
-                    <channel.icon />
-                    {channel.name}
-                  </span>
-                ))}
+            {/* CTAs */}
+            <AnimatedSection delay={0.15}>
+              <div className="flex flex-wrap items-center gap-4">
+                <a
+                  href="#contacto"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] transition-colors"
+                >
+                  <WhatsAppIcon />
+                  Agenda una Demo Gratis
+                </a>
+                <a
+                  href="/planes"
+                  className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/20 text-white text-lg font-semibold rounded-full hover:bg-white/10 transition-colors"
+                >
+                  Ver Planes →
+                </a>
               </div>
-            </AnimatedSection>
-
-            {/* CTA */}
-            <AnimatedSection delay={0.4}>
-              <a
-                href="#contacto"
-                className="inline-flex items-center justify-center px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] transition-colors"
-              >
-                Agenda una Demo Gratis
-              </a>
             </AnimatedSection>
           </div>
 

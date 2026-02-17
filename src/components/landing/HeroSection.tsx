@@ -117,7 +117,7 @@ function useTypingEffect(text: string, speed: number = 60, delay: number = 800) 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
   const { text: typewriterText } = useTypewriter(rotatingWords, 80, 50, 2000);
-  const badgeText = 'Automatización e IA para negocios';
+  const badgeText = 'Bots de WhatsApp con IA para negocios';
   const { displayedText, showCursor } = useTypingEffect(
     badgeText,
     50,
@@ -166,7 +166,7 @@ export function HeroSection() {
             {/* Subtitle */}
             <Item {...itemProps}>
               <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-xl">
-                Un agente de IA que atiende, vende y cobra por ti en WhatsApp, Instagram y Messenger. 24/7.
+                Un bot de WhatsApp con IA que atiende, vende y cobra por ti. 24/7, sin que intervengas.
               </p>
             </Item>
 
@@ -174,12 +174,12 @@ export function HeroSection() {
             <Item {...itemProps}>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <motion.a
-                  href="#agente"
+                  href="#contacto"
                   className="inline-flex items-center justify-center px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] transition-colors"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                 >
-                  Conoce al Agente IA
+                  Agenda tu Demo Gratis
                 </motion.a>
                 <a
                   href="#recursos"

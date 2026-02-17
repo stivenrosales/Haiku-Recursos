@@ -10,10 +10,10 @@ export function FinalCta() {
         <AnimatedSection>
           <div className="bg-haiku-mint rounded-[24px] px-8 py-16 lg:px-16 lg:py-20 text-center">
             <h2 className="font-display text-3xl lg:text-5xl font-bold text-white mb-4">
-              ¿Listo para vender en automático?
+              ¿Listo para que tu WhatsApp venda solo?
             </h2>
             <p className="text-lg lg:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Agenda una demo gratuita y mira cómo tu agente IA cierra ventas mientras duermes.
+              Agenda una demo gratuita y mira cómo tu bot de WhatsApp con IA cierra ventas mientras duermes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a

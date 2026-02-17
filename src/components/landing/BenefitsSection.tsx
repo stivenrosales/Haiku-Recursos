@@ -7,7 +7,7 @@ const benefits = [
   {
     icon: MessageCircle,
     title: 'Ventas en Automático',
-    description: 'Tu agente IA atiende, califica y cierra ventas por WhatsApp, Instagram y Messenger sin intervención.',
+    description: 'Tu bot de WhatsApp con IA atiende, califica y cierra ventas sin intervención humana.',
   },
   {
     icon: Clock,

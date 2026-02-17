@@ -7,7 +7,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <h3 className="font-display text-2xl font-bold mb-3">Haiku Business</h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Automatización e IA para negocios. Ayudamos a empresas a escalar con tecnología inteligente.
+              Bots de WhatsApp con IA que atienden, venden y cierran por ti. 24/7, sin que intervengas.
             </p>
             {/* Social icons */}
             <div className="flex gap-3">
@@ -75,9 +75,9 @@ export function Footer() {
               Recursos
             </h4>
             <ul className="space-y-3">
-              <li><a href="#recursos" className="text-gray-400 hover:text-white text-sm transition-colors">Recursos Gratuitos</a></li>
-              <li><a href="#beneficios" className="text-gray-400 hover:text-white text-sm transition-colors">Beneficios</a></li>
-              <li><a href="#faq" className="text-gray-400 hover:text-white text-sm transition-colors">Preguntas Frecuentes</a></li>
+              <li><a href="/#recursos" className="text-gray-400 hover:text-white text-sm transition-colors">Recursos Gratuitos</a></li>
+              <li><a href="/#beneficios" className="text-gray-400 hover:text-white text-sm transition-colors">Beneficios</a></li>
+              <li><a href="/#faq" className="text-gray-400 hover:text-white text-sm transition-colors">Preguntas Frecuentes</a></li>
             </ul>
           </div>
 
@@ -87,9 +87,9 @@ export function Footer() {
               Empresa
             </h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-gray-400 hover:text-white text-sm transition-colors">Sobre Nosotros</a></li>
-              <li><a href="#testimonios" className="text-gray-400 hover:text-white text-sm transition-colors">Testimonios</a></li>
-              <li><a href="#contacto" className="text-gray-400 hover:text-white text-sm transition-colors">Contacto</a></li>
+              <li><a href="/#agente" className="text-gray-400 hover:text-white text-sm transition-colors">Agente WhatsApp IA</a></li>
+              <li><a href="/#testimonios" className="text-gray-400 hover:text-white text-sm transition-colors">Testimonios</a></li>
+              <li><a href="/#contacto" className="text-gray-400 hover:text-white text-sm transition-colors">Contacto</a></li>
             </ul>
           </div>
 
