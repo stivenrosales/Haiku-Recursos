@@ -10,6 +10,7 @@ import {
   Phone,
   Mail,
   Wrench,
+  ArrowLeft,
   ArrowRight,
   ChevronDown,
 } from 'lucide-react';
@@ -146,8 +147,9 @@ export function PlanesContent() {
       {/* ── NAV (simple for /planes) ── */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-haiku-beige/85 backdrop-blur-xl border-b border-black/[0.04]">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
-          <a href="/" className="font-display text-2xl font-bold text-haiku-black">
-            Haiku Business
+          <a href="/" className="flex items-center gap-2 group">
+            <ArrowLeft className="w-4 h-4 text-gray-400 group-hover:text-haiku-mint transition-colors" />
+            <span className="font-display text-2xl font-bold text-haiku-black">Haiku Business</span>
           </a>
           <a
             href="/#contacto"
