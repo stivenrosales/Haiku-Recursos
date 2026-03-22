@@ -7,7 +7,7 @@ export function Footer() {
           <div className="lg:col-span-1">
             <h3 className="font-display text-2xl font-bold mb-3">Haiku Business</h3>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Bots de WhatsApp con IA que atienden, venden y cierran por ti. 24/7, sin que intervengas.
+              Bots de WhatsApp con IA que atienden, califican y agendan por ti. 24/7, sin que intervengas.
             </p>
             {/* Social icons */}
             <div className="flex gap-3">
@@ -89,7 +89,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li><a href="/#agente" className="text-gray-400 hover:text-white text-sm transition-colors">Agente WhatsApp IA</a></li>
               <li><a href="/#testimonios" className="text-gray-400 hover:text-white text-sm transition-colors">Testimonios</a></li>
-              <li><a href="/#contacto" className="text-gray-400 hover:text-white text-sm transition-colors">Contacto</a></li>
+              <li><a href="https://wa.me/51944138721?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20los%20bots%20de%20WhatsApp%20con%20IA" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">Contacto</a></li>
               <li><a href="/privacidad" className="text-gray-400 hover:text-white text-sm transition-colors">Política de Privacidad</a></li>
               <li><a href="/eliminacion-datos" className="text-gray-400 hover:text-white text-sm transition-colors">Eliminación de Datos</a></li>
             </ul>

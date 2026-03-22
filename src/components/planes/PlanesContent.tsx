@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { AnimatedSection } from '../landing/AnimatedSection';
 import {
   MessageCircle,
@@ -13,7 +14,9 @@ import {
   ArrowLeft,
   ArrowRight,
   ChevronDown,
+  Globe,
 } from 'lucide-react';
+import { WHATSAPP_URL } from '@/lib/whatsapp';
 
 /* ── Promise Strip cards ── */
 const promises = [
@@ -39,8 +42,21 @@ const promises = [
   },
 ];
 
-/* ── Plans ── */
-const planPro = {
+/* ── Plan types ── */
+type PlanFeature = { text: string; highlight: boolean; suffix: string };
+type Plan = {
+  name: string;
+  tagline: string;
+  price: string;
+  description: string;
+  features: PlanFeature[];
+  cta: string;
+  setup?: string;
+};
+type EnterprisePlan = Omit<Plan, 'price' | 'setup'> & { price?: never; setup?: never };
+
+/* ── Plans: Perú (S/) ── */
+const planProPE: Plan = {
   name: 'Plan Pro',
   tagline: '"Tu Negocio Atiende Solo"',
   price: '597',
@@ -60,7 +76,7 @@ const planPro = {
   setup: 'Setup gratis para los primeros 10 clientes (compromiso mín. 3 meses). Después S/ 997 o gratis con compromiso de 4 meses.',
 };
 
-const planScale = {
+const planScalePE: Plan = {
   name: 'Plan Scale',
   tagline: '"Tu Negocio Vende Solo"',
   price: '1,097',
@@ -80,7 +96,7 @@ const planScale = {
   setup: 'Setup gratis para los primeros 10 clientes (compromiso 3 meses). Después S/ 1,997 o gratis con compromiso de 6 meses.',
 };
 
-const planEnterprise = {
+const planEnterprisePE: EnterprisePlan = {
   name: 'Plan Enterprise',
   tagline: '"A tu medida"',
   description:
@@ -96,8 +112,67 @@ const planEnterprise = {
   cta: 'Solicitar Cotización',
 };
 
+/* ── Plans: Internacional (USD) ── */
+const planProINTL: Plan = {
+  name: 'Plan Pro',
+  tagline: '"Tu Negocio Atiende Solo"',
+  price: '197',
+  description:
+    'Para negocios que pierden clientes porque no responden a tiempo. El bot atiende 24/7 sin intervención humana.',
+  features: [
+    { text: '1 bot de WhatsApp con IA', highlight: true, suffix: ' conectado a 1 número' },
+    { text: 'Hasta 300 conversaciones IA', highlight: true, suffix: ' al mes' },
+    { text: '500 templates', highlight: true, suffix: ' de remarketing (confirmaciones, recordatorios, follow-ups)' },
+    { text: '3 agentes humanos', highlight: true, suffix: ' en Chatwoot para escalamiento' },
+    { text: 'Integración CRM (Google Sheets o Airtable) — cada lead se registra automáticamente', highlight: false, suffix: '' },
+    { text: 'Agendamiento automático', highlight: true, suffix: ' con Google Calendar' },
+    { text: 'Dashboard con métricas esenciales (conversaciones, leads, consumo)', highlight: false, suffix: '' },
+    { text: 'Soporte lunes a viernes en horario laboral', highlight: false, suffix: '' },
+  ],
+  cta: 'Empezar con Pro',
+  setup: 'Setup gratis para los primeros 10 clientes (compromiso mín. 3 meses). Después $297 o gratis con compromiso de 4 meses.',
+};
+
+const planScaleINTL: Plan = {
+  name: 'Plan Scale',
+  tagline: '"Tu Negocio Vende Solo"',
+  price: '397',
+  description:
+    'Para negocios en crecimiento que necesitan no solo atender, sino vender activamente. El bot persigue leads y hace remarketing inteligente.',
+  features: [
+    { text: 'Hasta 1,000 conversaciones IA', highlight: true, suffix: ' al mes' },
+    { text: '1,500 templates', highlight: true, suffix: ' de remarketing' },
+    { text: 'Agentes ilimitados', highlight: true, suffix: ' en Chatwoot' },
+    { text: 'Envío de imágenes y PDFs', highlight: true, suffix: ' dentro del chat (catálogos, fotos de productos)' },
+    { text: 'Secuencias de follow-up', highlight: true, suffix: ' automatizadas (cadenas de 3-5 mensajes programados)' },
+    { text: 'Dashboard avanzado', highlight: true, suffix: ' con métricas por vendedor' },
+    { text: 'Soporte prioritario', highlight: true, suffix: ' — respuesta en 4 horas' },
+    { text: 'Optimización mensual', highlight: true, suffix: ' — revisión de conversaciones y mejora de prompts' },
+  ],
+  cta: 'Empezar con Scale',
+  setup: 'Setup gratis para los primeros 10 clientes (compromiso 3 meses). Después $597 o gratis con compromiso de 6 meses.',
+};
+
+const planEnterpriseINTL: EnterprisePlan = {
+  name: 'Plan Enterprise',
+  tagline: '"A tu medida"',
+  description:
+    'Para empresas con alto volumen que necesitan una solución hecha a medida con integraciones avanzadas.',
+  features: [
+    { text: 'Volumen de conversaciones: ', highlight: false, suffix: '$0.15–0.25 por conversación según escala' },
+    { text: 'Volumen de templates: ', highlight: false, suffix: '$0.12 por template' },
+    { text: 'Integraciones custom', highlight: true, suffix: ' con ERPs y APIs ($150–450 setup único)' },
+    { text: 'Soporte estándar incluido', highlight: false, suffix: '' },
+    { text: 'Soporte prioritario: ', highlight: false, suffix: '+$87/mes' },
+    { text: 'Soporte dedicado (1h respuesta): ', highlight: false, suffix: '+$177/mes' },
+  ],
+  cta: 'Solicitar Cotización',
+};
+
 /* ── Add-ons ── */
-const addons = [
+type Addon = { icon: typeof Phone; title: string; description: string; price: string; unit: string };
+
+const addonsPE: Addon[] = [
   {
     icon: Phone,
     title: 'Bot adicional',
@@ -128,6 +203,37 @@ const addons = [
   },
 ];
 
+const addonsINTL: Addon[] = [
+  {
+    icon: Phone,
+    title: 'Bot adicional',
+    description: 'Para otra línea, sucursal o marca. Misma configuración, diferente número.',
+    price: '+$127',
+    unit: '/mes',
+  },
+  {
+    icon: MessageCircle,
+    title: '+100 conversaciones',
+    description: 'Bloque extra de 100 conversaciones con IA para cuando necesites más capacidad.',
+    price: '$37',
+    unit: '/bloque',
+  },
+  {
+    icon: Mail,
+    title: '+500 templates',
+    description: 'Bloque extra de 500 templates de remarketing para campañas más grandes.',
+    price: '$67',
+    unit: '/bloque',
+  },
+  {
+    icon: Wrench,
+    title: 'Workflow personalizado',
+    description: 'Automatización a medida. Integraciones custom, lógica compleja, lo que necesites.',
+    price: '$150–450',
+    unit: '/proyecto',
+  },
+];
+
 /* ── Feature check item ── */
 function FeatureItem({ text, highlight, suffix }: { text: string; highlight: boolean; suffix: string }) {
   return (
@@ -141,7 +247,15 @@ function FeatureItem({ text, highlight, suffix }: { text: string; highlight: boo
   );
 }
 
-export function PlanesContent() {
+export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
+  const [isPeru, setIsPeru] = useState(initialIsPeru);
+  const currency = isPeru ? 'S/' : '$';
+  const planPro = isPeru ? planProPE : planProINTL;
+  const planScale = isPeru ? planScalePE : planScaleINTL;
+  const planEnterprise = isPeru ? planEnterprisePE : planEnterpriseINTL;
+  const addons = isPeru ? addonsPE : addonsINTL;
+  const overagePrice = isPeru ? 'S/ 97 por bloque de 100' : '$37 por bloque de 100';
+
   return (
     <>
       {/* ── NAV (simple for /planes) ── */}
@@ -152,7 +266,9 @@ export function PlanesContent() {
             <span className="font-display text-2xl font-bold text-haiku-black">Haiku Business</span>
           </a>
           <a
-            href="/#contacto"
+            href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
             className="px-6 py-2.5 bg-haiku-mint text-white text-sm font-semibold rounded-full hover:bg-[#009160] transition-colors"
           >
             Agenda una Demo
@@ -177,8 +293,8 @@ export function PlanesContent() {
             <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-haiku-black leading-[1.1] mb-5">
               Tu WhatsApp{' '}
               <span className="text-haiku-mint">
-                atiende, vende
-                <br className="hidden sm:block" /> y cierra
+                atiende, califica
+                <br className="hidden sm:block" /> y agenda
               </span>{' '}
               por ti.
             </h1>
@@ -200,7 +316,9 @@ export function PlanesContent() {
                 <ChevronDown className="w-5 h-5" />
               </a>
               <a
-                href="/#contacto"
+                href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-haiku-black text-haiku-black text-lg font-semibold rounded-full hover:bg-haiku-black hover:text-white hover:-translate-y-0.5 transition-all"
               >
                 Agenda tu Demo Gratis
@@ -245,6 +363,34 @@ export function PlanesContent() {
               <p className="text-lg text-gray-600 max-w-xl mx-auto">
                 Setup gratis para los primeros 10 clientes. Sin sorpresas, sin letra chica.
               </p>
+
+              {/* ── Region toggle ── */}
+              <div className="flex items-center justify-center gap-3 mt-8">
+                <button
+                  onClick={() => setIsPeru(true)}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                    isPeru
+                      ? 'bg-haiku-black text-white shadow-[0_4px_16px_rgba(0,0,0,0.15)]'
+                      : 'bg-white text-gray-500 hover:text-haiku-black hover:bg-gray-50'
+                  }`}
+                >
+                  <span className="text-base">🇵🇪</span>
+                  Perú
+                  {isPeru && <span className="text-xs font-normal text-white/60">S/</span>}
+                </button>
+                <button
+                  onClick={() => setIsPeru(false)}
+                  className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all ${
+                    !isPeru
+                      ? 'bg-haiku-black text-white shadow-[0_4px_16px_rgba(0,0,0,0.15)]'
+                      : 'bg-white text-gray-500 hover:text-haiku-black hover:bg-gray-50'
+                  }`}
+                >
+                  <Globe className="w-4 h-4" />
+                  Internacional
+                  {!isPeru && <span className="text-xs font-normal text-white/60">USD</span>}
+                </button>
+              </div>
             </div>
           </AnimatedSection>
 
@@ -256,7 +402,7 @@ export function PlanesContent() {
                   <h3 className="font-display text-xl font-bold text-haiku-black mb-1">{planPro.name}</h3>
                   <p className="text-sm text-gray-500 italic mb-5">{planPro.tagline}</p>
                   <div className="font-display text-5xl font-bold text-haiku-black leading-none">
-                    <span className="text-xl font-semibold align-super mr-0.5">S/</span>
+                    <span className="text-xl font-semibold align-super mr-0.5">{currency}</span>
                     {planPro.price}
                     <span className="text-base font-normal text-gray-500">/mes</span>
                   </div>
@@ -273,7 +419,9 @@ export function PlanesContent() {
 
                 <div className="px-7 pb-7">
                   <a
-                    href="/#contacto"
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-center w-full px-6 py-3.5 bg-haiku-mint text-white font-semibold rounded-full hover:bg-[#009160] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,168,107,0.3)] transition-all"
                   >
                     {planPro.cta}
@@ -281,7 +429,7 @@ export function PlanesContent() {
                   <div className="mt-4 p-3.5 bg-gray-50 border border-gray-200 rounded-xl">
                     <p className="text-xs text-gray-600 leading-relaxed">
                       <span className="font-semibold text-haiku-black">Setup gratis</span>{' '}
-                      {planPro.setup.replace('Setup gratis ', '')}
+                      {planPro.setup?.replace('Setup gratis ', '')}
                     </p>
                   </div>
                 </div>
@@ -299,7 +447,7 @@ export function PlanesContent() {
                   <h3 className="font-display text-xl font-bold text-white mb-1">{planScale.name}</h3>
                   <p className="text-sm text-white/50 italic mb-5">{planScale.tagline}</p>
                   <div className="font-display text-5xl font-bold text-white leading-none">
-                    <span className="text-xl font-semibold align-super mr-0.5">S/</span>
+                    <span className="text-xl font-semibold align-super mr-0.5">{currency}</span>
                     {planScale.price}
                     <span className="text-base font-normal text-white/40">/mes</span>
                   </div>
@@ -322,7 +470,9 @@ export function PlanesContent() {
 
                 <div className="px-7 pb-7">
                   <a
-                    href="/#contacto"
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-center w-full px-6 py-3.5 bg-white text-haiku-black font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 transition-all"
                   >
                     {planScale.cta}
@@ -330,7 +480,7 @@ export function PlanesContent() {
                   <div className="mt-4 p-3.5 bg-white/5 border border-white/10 rounded-xl">
                     <p className="text-xs text-white/60 leading-relaxed">
                       <span className="font-semibold text-white">Setup gratis</span>{' '}
-                      {planScale.setup.replace('Setup gratis ', '')}
+                      {planScale.setup?.replace('Setup gratis ', '')}
                     </p>
                   </div>
                 </div>
@@ -359,7 +509,9 @@ export function PlanesContent() {
 
                 <div className="px-7 pb-7">
                   <a
-                    href="/#contacto"
+                    href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-center w-full px-6 py-3.5 border-2 border-haiku-black text-haiku-black font-semibold rounded-full hover:bg-haiku-black hover:text-white hover:-translate-y-0.5 transition-all"
                   >
                     {planEnterprise.cta}
@@ -383,7 +535,9 @@ export function PlanesContent() {
                   En Enterprise, todo se ajusta a tu operación. Cuéntanos tu volumen y diseñamos la solución perfecta para tu negocio.
                 </p>
                 <a
-                  href="/#contacto"
+                  href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-haiku-black text-lg font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.15)] transition-all"
                 >
                   Cotizar Enterprise
@@ -448,7 +602,7 @@ export function PlanesContent() {
                   Si superas tu límite, el sistema{' '}
                   <strong className="text-haiku-black">sigue funcionando</strong>. Las conversaciones
                   extra se cobran automáticamente en tu siguiente factura a{' '}
-                  <strong className="text-haiku-black">S/ 97 por bloque de 100</strong>. Sin
+                  <strong className="text-haiku-black">{overagePrice}</strong>. Sin
                   interrupciones, sin sorpresas.
                 </p>
               </div>
@@ -493,20 +647,22 @@ export function PlanesContent() {
               <div className="absolute -bottom-[100px] -left-[100px] w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(0,0,0,0.08)_0%,transparent_70%)] pointer-events-none" />
 
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 relative">
-                ¿Listo para que tu WhatsApp venda solo?
+                ¿Listo para que tu WhatsApp trabaje por ti?
               </h2>
               <p className="text-lg text-white/80 max-w-xl mx-auto mb-8 relative">
                 Agenda una demo gratuita. Te mostramos cómo funciona con tu negocio real en 30 minutos.
               </p>
               <a
-                href="/#contacto"
+                href={WHATSAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-haiku-mint text-lg font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.15)] transition-all relative"
               >
                 Agenda tu Demo Gratis
                 <ArrowRight className="w-5 h-5" />
               </a>
               <p className="text-sm text-white/55 mt-5 relative">
-                Sin compromiso. Respondemos en menos de 24 horas.
+                Pagas a fin de mes solo si funciona · Respondemos en menos de 24h
               </p>
             </div>
           </AnimatedSection>

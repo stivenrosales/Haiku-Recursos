@@ -4,6 +4,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { AnimatedSection } from './AnimatedSection';
 import { motion, AnimatePresence, useReducedMotion, useInView } from 'motion/react';
 import { MessageCircle, Clock, TrendingUp, Bot, CheckCircle, DollarSign, ImageIcon, Zap, BarChart3, CalendarCheck, Rocket } from 'lucide-react';
+import { WHATSAPP_URL } from '@/lib/whatsapp';
 
 // --- Chat sequence types ---
 type ChatStep =
@@ -17,49 +18,47 @@ type ChatStep =
 // Typing indicators always precede agent responses.
 // Client messages appear after a shorter pause (they're "instant").
 const chatSteps: ChatStep[] = [
-  { type: 'message', from: 'client', text: 'Hola, quisiera información sobre sus servicios', delay: 800, time: '10:24' },
+  { type: 'message', from: 'client', text: 'Hola, vi su anuncio. ¿Cuánto cuesta una consulta de diseño de interiores?', delay: 800, time: '10:24' },
   { type: 'typing', duration: 1400 },
-  { type: 'message', from: 'agent', text: '¡Hola! Claro, tenemos planes personalizados para tu negocio. ¿En qué área necesitas ayuda?', time: '10:24' },
-  { type: 'message', from: 'client', text: 'Consultoría de ventas. ¿Cuánto cuesta?', delay: 1800, time: '10:25' },
+  { type: 'message', from: 'agent', text: '¡Hola! Gracias por escribirnos 😊 Tenemos paquetes desde S/ 1,200. ¿Es para casa o departamento? ¿Cuántos ambientes necesitas rediseñar?', time: '10:24' },
+  { type: 'message', from: 'client', text: 'Un depa de 3 ambientes. Sala, cocina y dormitorio principal', delay: 1800, time: '10:25' },
   { type: 'typing', duration: 1200 },
-  { type: 'message', from: 'agent', text: 'Tenemos el Plan Pro desde S/ 597/mes con atención 24/7, CRM y dashboard de métricas.', time: '10:25' },
-  { type: 'message', from: 'client', text: 'Genial, quiero contratar', delay: 1600, time: '10:26' },
+  { type: 'message', from: 'agent', text: 'Perfecto, para 3 ambientes el paquete es de S/ 2,800. Incluye visita, propuesta 3D y acompañamiento. ¿Te gustaría agendar una visita gratuita?', time: '10:25' },
+  { type: 'message', from: 'client', text: 'Sí, me interesa la visita', delay: 1600, time: '10:26' },
+  { type: 'typing', duration: 1200 },
+  { type: 'message', from: 'agent', text: 'Genial. Tengo disponibilidad mañana a las 10am o el jueves a las 3pm. ¿Cuál te queda mejor?', time: '10:26' },
+  { type: 'message', from: 'client', text: 'Mañana a las 10am', delay: 1400, time: '10:27' },
   { type: 'typing', duration: 1000 },
-  { type: 'message', from: 'agent', text: 'Perfecto, te paso los datos para el pago:', time: '10:26' },
-  { type: 'account', time: '10:26' },
-  { type: 'message', from: 'client', text: 'Listo, ya transferí. Te envío el comprobante:', delay: 2200, time: '10:31' },
-  { type: 'voucher', time: '10:31' },
-  { type: 'typing', duration: 1200 },
-  { type: 'message', from: 'agent', text: '¡Recibido! Tu plan se activa en las próximas 24 horas. ¡Bienvenido!', time: '10:31' },
+  { type: 'message', from: 'agent', text: '✅ Agendado para mañana a las 10am. Te envié la confirmación por correo. ¡Nos vemos!', time: '10:27' },
   { type: 'switch-to-notifications' },
 ];
 
 // --- Notification data for the second screen ---
 const notifications = [
-  { name: 'María G.', amount: 'S/ 597', time: 'hace 2 min', service: 'Plan Pro' },
-  { name: 'Carlos R.', amount: 'S/ 1,097', time: 'hace 8 min', service: 'Plan Scale' },
-  { name: 'Ana L.', amount: 'S/ 597', time: 'hace 15 min', service: 'Plan Pro' },
-  { name: 'Pedro M.', amount: 'S/ 1,097', time: 'hace 23 min', service: 'Plan Scale' },
-  { name: 'Laura S.', amount: 'S/ 597', time: 'hace 31 min', service: 'Plan Pro' },
-  { name: 'Diego F.', amount: 'S/ 1,097', time: 'hace 45 min', service: 'Plan Scale' },
-  { name: 'Sofía V.', amount: 'S/ 597', time: 'hace 1h', service: 'Plan Pro' },
+  { name: 'María G.', detail: 'Mañana 10:00 AM', time: 'hace 2 min', service: 'Diseño 3 ambientes' },
+  { name: 'Carlos R.', detail: 'Mañana 11:30 AM', time: 'hace 8 min', service: 'Remodelación cocina' },
+  { name: 'Ana L.', detail: 'Mañana 3:00 PM', time: 'hace 15 min', service: 'Consulta inicial' },
+  { name: 'Pedro M.', detail: 'Jueves 9:00 AM', time: 'hace 23 min', service: 'Diseño oficina' },
+  { name: 'Laura S.', detail: 'Jueves 2:00 PM', time: 'hace 31 min', service: 'Diseño 2 ambientes' },
+  { name: 'Diego F.', detail: 'Viernes 10:00 AM', time: 'hace 45 min', service: 'Remodelación baño' },
+  { name: 'Sofía V.', detail: 'Viernes 4:00 PM', time: 'hace 1h', service: 'Consulta inicial' },
 ];
 
 const features = [
   {
     icon: Clock,
-    title: 'Atiende y vende 24/7',
-    description: 'Responde en segundos, agenda citas y registra cada lead en tu CRM. Automático.',
+    title: 'Califica y agenda 24/7',
+    description: 'Responde en segundos, precalifica cada lead y agenda reuniones en Google Calendar. Automático.',
   },
   {
-    icon: BarChart3,
-    title: 'Tu propio dashboard',
-    description: 'Métricas en tiempo real: conversaciones, leads, ventas y rendimiento de tu bot.',
+    icon: TrendingUp,
+    title: 'CAPI de Meta incluido',
+    description: 'Cada reunión agendada envía feedback a Meta Ads para optimizar tus campañas y traer mejores leads.',
   },
   {
     icon: Rocket,
     title: 'Listo en 1 semana',
-    description: 'Configuramos todo por ti. En 7 días tu WhatsApp ya está vendiendo solo.',
+    description: 'Configuramos todo por ti. En 7 días tu WhatsApp ya está atendiendo y calificando leads.',
   },
 ];
 
@@ -310,10 +309,10 @@ function ChatMockup({ isVisible }: { isVisible: boolean }) {
             <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10 flex-shrink-0">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-haiku-mint/20 flex items-center justify-center">
-                  <DollarSign className="w-4 h-4 text-haiku-mint" />
+                  <CalendarCheck className="w-4 h-4 text-haiku-mint" />
                 </div>
                 <div>
-                  <p className="text-white font-semibold text-sm">Pagos recibidos</p>
+                  <p className="text-white font-semibold text-sm">Reuniones agendadas</p>
                   <p className="text-white/40 text-[10px]">Hoy</p>
                 </div>
               </div>
@@ -346,7 +345,7 @@ function ChatMockup({ isVisible }: { isVisible: boolean }) {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
                       <p className="text-white text-xs font-medium truncate">{notif.name}</p>
-                      <span className="text-haiku-mint text-xs font-bold">{notif.amount}</span>
+                      <span className="text-haiku-mint text-xs font-bold">{notif.detail}</span>
                     </div>
                     <div className="flex items-center justify-between mt-0.5">
                       <p className="text-white/40 text-[10px]">{notif.service}</p>
@@ -372,7 +371,7 @@ function ChatMockup({ isVisible }: { isVisible: boolean }) {
                 <Bot className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-white font-semibold text-sm">Agente IA de Ventas</p>
+                <p className="text-white font-semibold text-sm">Studio Interiores</p>
                 <p className="text-haiku-mint text-xs flex items-center gap-1">
                   <span className="w-1.5 h-1.5 bg-haiku-mint rounded-full animate-pulse" />
                   En línea
@@ -384,28 +383,7 @@ function ChatMockup({ isVisible }: { isVisible: boolean }) {
             <div ref={chatContainerRef} className="flex-1 overflow-y-auto overflow-x-hidden space-y-3 scrollbar-hide">
               {visibleSteps.map((step, i) => {
                 if (step.type === 'typing' || step.type === 'switch-to-notifications') return null;
-
-                if (step.type === 'account') {
-                  return (
-                    <ChatBubble key={`step-${i}`} from="special">
-                      <AccountCard />
-                      {step.time && (
-                        <p className="text-[10px] text-white/25 mt-1 ml-1">{step.time}</p>
-                      )}
-                    </ChatBubble>
-                  );
-                }
-
-                if (step.type === 'voucher') {
-                  return (
-                    <ChatBubble key={`step-${i}`} from="special">
-                      <VoucherImage />
-                      {step.time && (
-                        <p className="text-[10px] text-white/25 mt-1 text-right mr-1">{step.time}</p>
-                      )}
-                    </ChatBubble>
-                  );
-                }
+                if (step.type === 'account' || step.type === 'voucher') return null;
 
                 const isAgent = step.from === 'agent';
                 // Show "Respondido en 3s" badge after the first agent message
@@ -476,10 +454,10 @@ export function AgentSection() {
                 Producto Estrella
               </p>
               <h2 className="font-display text-4xl lg:text-5xl font-bold text-white leading-[1.1] mb-5">
-                Tu WhatsApp atiende, vende y cierra por ti
+                Tu WhatsApp atiende, califica y agenda por ti
               </h2>
               <p className="text-lg text-white/60 leading-relaxed mb-8 max-w-lg">
-                Un bot con IA que responde 24/7, agenda citas en Google Calendar, registra leads en tu CRM y te muestra todo en un dashboard propio. Listo en 1 semana.
+                Un bot con IA que responde 24/7, precalifica leads de tus campañas de Meta Ads, agenda reuniones y envía conversiones vía CAPI para optimizar tus anuncios. Listo en 1 semana.
               </p>
             </AnimatedSection>
 
@@ -506,7 +484,9 @@ export function AgentSection() {
             <AnimatedSection delay={0.15}>
               <div className="flex flex-wrap items-center gap-4">
                 <a
-                  href="#contacto"
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] transition-colors"
                 >
                   <WhatsAppIcon />

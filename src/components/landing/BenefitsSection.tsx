@@ -2,12 +2,13 @@
 
 import { AnimatedSection } from './AnimatedSection';
 import { Clock, MessageCircle, TrendingUp, Bot, Zap, BarChart3 } from 'lucide-react';
+import { WHATSAPP_URL } from '@/lib/whatsapp';
 
 const benefits = [
   {
     icon: MessageCircle,
-    title: 'Ventas en Automático',
-    description: 'Tu bot de WhatsApp con IA atiende, califica y cierra ventas sin intervención humana.',
+    title: 'Leads Precalificados',
+    description: 'Tu bot de WhatsApp con IA atiende, califica y deja cada lead listo para que tú cierres.',
   },
   {
     icon: Clock,
@@ -27,7 +28,7 @@ const benefits = [
   {
     icon: Zap,
     title: 'Activo en 1 Semana',
-    description: 'Implementación rápida. En 7 días tu agente ya está vendiendo por ti.',
+    description: 'Implementación rápida. En 7 días tu agente ya está atendiendo por ti.',
   },
   {
     icon: BarChart3,
@@ -68,6 +69,23 @@ export function BenefitsSection() {
             </AnimatedSection>
           ))}
         </div>
+
+        {/* CTA */}
+        <AnimatedSection delay={0.3}>
+          <div className="text-center mt-12">
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,168,107,0.3)] transition-all"
+            >
+              Agenda tu Demo Gratis
+            </a>
+            <p className="text-sm text-gray-500 mt-3">
+              Pagas a fin de mes solo si funciona. Sin riesgo.
+            </p>
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );

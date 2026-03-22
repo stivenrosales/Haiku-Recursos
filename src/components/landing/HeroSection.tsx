@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
+import { WHATSAPP_URL } from '@/lib/whatsapp';
 
 const container = {
   hidden: {},
@@ -22,15 +23,14 @@ const item = {
 
 // Rotating words for the H1
 const rotatingWords = [
-  'Crece.',
-  'Ahorra.',
-  'Escala.',
+  'atiende.',
+  'califica.',
+  'agenda.',
 ];
 
 // Typewriter hook — types text, pauses, deletes, then types next word
 function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 50, pauseTime = 2000) {
   const [text, setText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
   const indexRef = useRef(0);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
 
@@ -41,24 +41,20 @@ function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 50, pauseT
 
     const tick = () => {
       if (!deleting) {
-        // Typing forward
         charIdx++;
         setText(word().slice(0, charIdx));
 
         if (charIdx === word().length) {
-          // Finished typing — pause before deleting
           deleting = true;
           timeoutRef.current = setTimeout(tick, pauseTime);
         } else {
           timeoutRef.current = setTimeout(tick, typeSpeed);
         }
       } else {
-        // Deleting
         charIdx--;
         setText(word().slice(0, charIdx));
 
         if (charIdx === 0) {
-          // Finished deleting — move to next word
           deleting = false;
           indexRef.current = (indexRef.current + 1) % words.length;
           timeoutRef.current = setTimeout(tick, typeSpeed * 2);
@@ -68,7 +64,6 @@ function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 50, pauseT
       }
     };
 
-    // Start with first word already displayed, then pause and delete
     charIdx = word().length;
     setText(word());
     timeoutRef.current = setTimeout(() => {
@@ -79,50 +74,12 @@ function useTypewriter(words: string[], typeSpeed = 80, deleteSpeed = 50, pauseT
     return () => { if (timeoutRef.current) clearTimeout(timeoutRef.current); };
   }, [words, typeSpeed, deleteSpeed, pauseTime]);
 
-  return { text, showCursor };
-}
-
-// Typing effect hook
-function useTypingEffect(text: string, speed: number = 60, delay: number = 800) {
-  const [displayedText, setDisplayedText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    let charIndex = 0;
-
-    const startTyping = () => {
-      timeout = setTimeout(function type() {
-        if (charIndex <= text.length) {
-          setDisplayedText(text.slice(0, charIndex));
-          charIndex++;
-          timeout = setTimeout(type, speed);
-        } else {
-          setTimeout(() => setShowCursor(false), 2000);
-        }
-      }, speed);
-    };
-
-    const initialDelay = setTimeout(startTyping, delay);
-
-    return () => {
-      clearTimeout(initialDelay);
-      clearTimeout(timeout);
-    };
-  }, [text, speed, delay]);
-
-  return { displayedText, showCursor };
+  return { text };
 }
 
 export function HeroSection() {
   const shouldReduceMotion = useReducedMotion();
   const { text: typewriterText } = useTypewriter(rotatingWords, 80, 50, 2000);
-  const badgeText = 'Bots de WhatsApp con IA para negocios';
-  const { displayedText, showCursor } = useTypingEffect(
-    badgeText,
-    50,
-    shouldReduceMotion ? 0 : 1000
-  );
 
   const Wrapper = shouldReduceMotion ? 'div' : motion.div;
   const Item = shouldReduceMotion ? 'div' : motion.div;
@@ -136,45 +93,59 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center">
           {/* Left column - Content */}
           <Wrapper {...wrapperProps}>
-            {/* Badge with typing effect */}
+            {/* Badge — static, no typewriter delay */}
             <Item {...itemProps}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-haiku-mint/10 rounded-full mb-6 min-h-[40px]">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-haiku-mint/10 rounded-full mb-6">
                 <span className="w-2 h-2 bg-haiku-mint rounded-full animate-pulse" />
                 <span className="text-sm font-medium text-haiku-mint">
-                  {shouldReduceMotion ? badgeText : displayedText}
-                  {!shouldReduceMotion && showCursor && (
-                    <span className="typing-cursor text-haiku-mint/80">|</span>
-                  )}
+                  Bots de WhatsApp con IA para negocios
                 </span>
               </div>
             </Item>
 
-            {/* H1 with rotating words */}
+            {/* H1 — specific to WhatsApp */}
             <Item {...itemProps}>
               <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-haiku-black leading-[1.1] mb-6">
-                Automatiza tu negocio.
+                Tu WhatsApp
                 <br />
-                <span className="text-haiku-mint inline-block min-w-[3ch]">
+                <span className="text-haiku-mint inline-block min-w-[4ch]">
                   {shouldReduceMotion ? rotatingWords[0] : typewriterText}
                   {!shouldReduceMotion && (
                     <span className="typing-cursor text-haiku-mint/70">|</span>
                   )}
                 </span>
+                <br />
+                <span className="text-haiku-black">por ti.</span>
               </h1>
             </Item>
 
             {/* Subtitle */}
             <Item {...itemProps}>
-              <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-xl">
-                Un bot de WhatsApp con IA que atiende, vende y cobra por ti. 24/7, sin que intervengas.
+              <p className="text-xl text-gray-600 leading-relaxed mb-4 max-w-xl">
+                Un bot con IA que responde en 3 segundos, califica leads y los deja listos para que tú cierres. 24/7, sin que intervengas.
               </p>
+            </Item>
+
+            {/* Urgency + Guarantee */}
+            <Item {...itemProps}>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-8">
+                <p className="text-sm font-semibold text-haiku-mint">
+                  Setup gratis para los primeros 10 clientes →
+                </p>
+                <span className="hidden sm:block w-1 h-1 bg-gray-300 rounded-full" />
+                <p className="text-sm text-gray-500">
+                  Pagas a fin de mes solo si funciona
+                </p>
+              </div>
             </Item>
 
             {/* CTA buttons */}
             <Item {...itemProps}>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <motion.a
-                  href="#contacto"
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center justify-center px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] transition-colors"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
@@ -182,10 +153,10 @@ export function HeroSection() {
                   Agenda tu Demo Gratis
                 </motion.a>
                 <a
-                  href="#recursos"
+                  href="/planes"
                   className="inline-flex items-center justify-center px-8 py-4 border-2 border-haiku-black text-haiku-black text-lg font-semibold rounded-full hover:bg-haiku-black hover:text-white transition-all"
                 >
-                  Recursos Gratis
+                  Ver Planes
                 </a>
               </div>
             </Item>
@@ -193,7 +164,7 @@ export function HeroSection() {
             {/* Trust indicator */}
             <Item {...itemProps}>
               <p className="text-sm text-gray-500">
-                Más de 50 negocios ya venden en automático con nosotros
+                Para agencias, consultorías, coaches y negocios de servicios
               </p>
             </Item>
           </Wrapper>

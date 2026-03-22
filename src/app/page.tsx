@@ -6,10 +6,9 @@ import { ResourcesShowcase } from '@/components/landing/ResourcesShowcase';
 import { YouTubeVideos } from '@/components/landing/YouTubeVideos';
 import { SocialProof } from '@/components/landing/SocialProof';
 import { BenefitsSection } from '@/components/landing/BenefitsSection';
-import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
 import { FaqSection } from '@/components/landing/FaqSection';
-import { ContactForm } from '@/components/landing/ContactForm';
 import { AgentSection } from '@/components/landing/AgentSection';
+import { WhatsAppBubble } from '@/components/landing/WhatsAppBubble';
 import { FinalCta } from '@/components/landing/FinalCta';
 import { Footer } from '@/components/landing/Footer';
 
@@ -78,15 +77,14 @@ export default async function HomePage() {
         <HeroSection />
         <SocialProof />
         <AgentSection />
-        <ResourcesShowcase recursos={recursos} />
         <BenefitsSection />
         <YouTubeVideos />
-        <TestimonialsSection />
         <FaqSection />
-        <ContactForm />
+        <ResourcesShowcase recursos={recursos} />
         <FinalCta />
       </main>
       <Footer />
+      <WhatsAppBubble />
     </div>
   );
 }

@@ -6,9 +6,9 @@ import { Building2, TrendingUp, ThumbsUp, Activity } from 'lucide-react';
 
 const stats = [
   { target: 50, suffix: '+', label: 'Negocios Activos', icon: Building2 },
-  { target: 40, suffix: '%', label: 'Más Conversiones', icon: TrendingUp },
-  { target: 100, suffix: '%', label: 'Clientes Satisfechos', icon: ThumbsUp },
-  { label: '24/7', sublabel: 'Agente IA Activo', icon: Activity, isStatic: true },
+  { target: 3, suffix: 's', label: 'Tiempo de Respuesta', icon: Activity },
+  { target: 30, suffix: '-50%', label: 'Más Conversiones', icon: TrendingUp },
+  { label: '24/7', sublabel: 'Agente IA Activo', icon: ThumbsUp, isStatic: true },
 ];
 
 export function SocialProof() {
