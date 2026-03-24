@@ -171,7 +171,7 @@ export function HeroSection() {
 
           {/* Right column - WhatsApp mockup (desktop) */}
           <div className="hidden lg:block">
-            <div className="relative w-full max-w-3xl ml-auto -mr-24 scale-150 origin-center">
+            <div className="relative w-full max-w-md ml-auto -mr-12 scale-110 origin-center">
               {/* Glow effect behind mockup */}
               <div
                 className={`absolute inset-0 m-auto w-[70%] h-[70%] rounded-full bg-haiku-mint/25 blur-[80px] ${
@@ -186,10 +186,10 @@ export function HeroSection() {
                 transition={{ duration: 0.8, delay: 0.3, type: 'spring' as const }}
               >
                 <Image
-                  src="/hero-v6.png"
+                  src="/hero-hq.webp"
                   alt="Haiku AI Assistant - Demo de conversación en WhatsApp"
-                  width={1200}
-                  height={896}
+                  width={911}
+                  height={1033}
                   className="w-full h-auto relative z-[1]"
                   priority
                 />
@@ -199,7 +199,7 @@ export function HeroSection() {
 
           {/* WhatsApp mockup on mobile */}
           <div className="lg:hidden">
-            <div className="relative w-full mx-auto scale-125 -my-8">
+            <div className="relative w-full max-w-sm mx-auto">
               {/* Mobile glow */}
               <div
                 className={`absolute inset-0 m-auto w-[60%] h-[60%] rounded-full bg-haiku-mint/20 blur-[60px] ${
@@ -207,7 +207,7 @@ export function HeroSection() {
                 }`}
               />
               <Image
-                src="/hero-v6.png"
+                src="/hero-hq.webp"
                 alt="Haiku AI Assistant - Demo de conversación en WhatsApp"
                 width={1200}
                 height={896}
