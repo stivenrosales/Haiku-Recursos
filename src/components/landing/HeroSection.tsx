@@ -88,9 +88,9 @@ export function HeroSection() {
   const itemProps = shouldReduceMotion ? {} : { variants: item };
 
   return (
-    <section className="pt-28 lg:pt-36 pb-10 lg:pb-14">
+    <section className="pt-28 lg:pt-36 pb-10 lg:pb-14 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-12 lg:gap-8 items-center">
           {/* Left column - Content */}
           <Wrapper {...wrapperProps}>
             {/* Badge — static, no typewriter delay */}
@@ -169,52 +169,51 @@ export function HeroSection() {
             </Item>
           </Wrapper>
 
-          {/* Right column - Image with glow (desktop) */}
+          {/* Right column - WhatsApp mockup (desktop) */}
           <div className="hidden lg:block">
-            <div className="relative w-full max-w-md ml-auto">
-              {/* Glow effect behind photo */}
+            <div className="relative w-full max-w-3xl ml-auto -mr-24 scale-150 origin-center">
+              {/* Glow effect behind mockup */}
               <div
-                className={`absolute -inset-6 rounded-[32px] bg-haiku-mint/30 blur-3xl ${
+                className={`absolute inset-0 m-auto w-[70%] h-[70%] rounded-full bg-haiku-mint/25 blur-[80px] ${
                   shouldReduceMotion ? 'opacity-40' : 'glow-effect'
                 }`}
               />
 
-              {/* Photo */}
               <motion.div
-                className="relative aspect-square w-full"
+                className="relative w-full"
                 initial={shouldReduceMotion ? {} : { opacity: 0, scale: 0.95 }}
                 animate={shouldReduceMotion ? {} : { opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.3, type: 'spring' as const }}
               >
                 <Image
-                  src="/foto.jpg"
-                  alt="Stiven Rosales - Haiku Business"
-                  fill
-                  className="rounded-[24px] shadow-xl object-cover relative z-[1]"
+                  src="/hero-v6.png"
+                  alt="Haiku AI Assistant - Demo de conversación en WhatsApp"
+                  width={1200}
+                  height={896}
+                  className="w-full h-auto relative z-[1]"
                   priority
                 />
               </motion.div>
             </div>
           </div>
 
-          {/* Image on mobile */}
+          {/* WhatsApp mockup on mobile */}
           <div className="lg:hidden">
-            <div className="relative w-full max-w-sm mx-auto">
+            <div className="relative w-full mx-auto scale-125 -my-8">
               {/* Mobile glow */}
               <div
-                className={`absolute -inset-4 rounded-[28px] bg-haiku-mint/25 blur-2xl ${
+                className={`absolute inset-0 m-auto w-[60%] h-[60%] rounded-full bg-haiku-mint/20 blur-[60px] ${
                   shouldReduceMotion ? 'opacity-30' : 'glow-effect'
                 }`}
               />
-              <div className="relative aspect-square w-full">
-                <Image
-                  src="/foto.jpg"
-                  alt="Stiven Rosales - Haiku Business"
-                  fill
-                  className="rounded-[24px] shadow-xl object-cover relative z-[1]"
-                  priority
-                />
-              </div>
+              <Image
+                src="/hero-v6.png"
+                alt="Haiku AI Assistant - Demo de conversación en WhatsApp"
+                width={1200}
+                height={896}
+                className="w-full h-auto relative z-[1]"
+                priority
+              />
             </div>
           </div>
         </div>
