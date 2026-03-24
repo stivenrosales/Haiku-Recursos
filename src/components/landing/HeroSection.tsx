@@ -174,7 +174,7 @@ export function HeroSection() {
             <div className="relative w-full max-w-md ml-auto -mr-12 scale-110 origin-center">
               {/* Glow effect behind mockup */}
               <div
-                className={`absolute inset-0 m-auto w-[70%] h-[70%] rounded-full bg-haiku-mint/25 blur-[80px] ${
+                className={`absolute -inset-12 m-auto w-[96%] h-[96%] rounded-full bg-haiku-mint/30 blur-[100px] ${
                   shouldReduceMotion ? 'opacity-40' : 'glow-effect'
                 }`}
               />
