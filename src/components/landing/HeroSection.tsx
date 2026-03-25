@@ -171,7 +171,7 @@ export function HeroSection() {
 
           {/* Right column - WhatsApp mockup (desktop) */}
           <div className="hidden lg:block">
-            <div className="relative w-full max-w-md ml-auto -mr-12 scale-110 origin-center">
+            <div className="relative w-full max-w-md mx-auto scale-110 origin-center">
               {/* Glow effect behind mockup */}
               <div
                 className={`absolute -inset-12 m-auto w-[96%] h-[96%] rounded-full bg-haiku-mint/30 blur-[100px] ${
