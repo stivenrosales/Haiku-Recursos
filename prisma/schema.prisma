@@ -77,3 +77,27 @@ model User {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 }
+
+model Booking {
+  id              String   @id @default(cuid())
+  calBookingId    Int      @unique
+  titulo          String
+  nombre          String
+  email           String
+  telefono        String
+  fechaReunion    DateTime
+  timezone        String   @default("America/Lima")
+  estado          String   @default("confirmed")
+
+  recordatorioManana   Boolean @default(false)
+  recordatorio2h       Boolean @default(false)
+  recordatorio1h       Boolean @default(false)
+  recordatorio10min    Boolean @default(false)
+  confirmacionEnviada  Boolean @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([fechaReunion])
+  @@index([estado])
+}
