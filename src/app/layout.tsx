@@ -1,3 +1,4 @@
+/* WhatsApp Booking Reminders v1.0 */
 import type { Metadata } from 'next';
 import { Space_Grotesk, Inter } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
