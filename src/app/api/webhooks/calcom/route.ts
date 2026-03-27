@@ -53,9 +53,14 @@ async function handleBookingCreated(payload: any) {
     return NextResponse.json({ error: 'No attendee' }, { status: 400 });
   }
 
+  console.log('[Cal.com Webhook] Responses:', JSON.stringify(payload.responses));
+  console.log('[Cal.com Webhook] Attendee:', JSON.stringify(attendee));
+
   const telefono =
     payload.responses?.phone?.value ||
+    payload.responses?.attendeePhoneNumber?.value ||
     payload.responses?.telefono?.value ||
+    attendee?.phone ||
     '';
 
   if (!telefono) {
