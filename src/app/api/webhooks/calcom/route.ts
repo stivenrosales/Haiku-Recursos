@@ -1,20 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHmac } from 'crypto';
 import { prisma } from '@/lib/prisma';
 import { sendWhatsApp } from '@/lib/evolution-api';
 import { mensajeConfirmacion, mensajeCancelacion } from '@/lib/booking-messages';
 
-function verifyWebhook(req: NextRequest): boolean {
-  const secret = req.headers.get('x-cal-secret');
-  return secret === process.env.CALCOM_WEBHOOK_SECRET;
+function verifyWebhook(rawBody: string, signature: string | null): boolean {
+  const secret = process.env.CALCOM_WEBHOOK_SECRET;
+  if (!secret) return false;
+  if (!signature) return false;
+
+  const hmac = createHmac('sha256', secret).update(rawBody).digest('hex');
+  return hmac === signature;
 }
 
 export async function POST(req: NextRequest) {
-  if (!verifyWebhook(req)) {
+  const rawBody = await req.text();
+  const signature = req.headers.get('x-cal-signature-256');
+
+  if (!verifyWebhook(rawBody, signature)) {
+    console.warn('[Cal.com Webhook] Invalid signature');
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
-    const body = await req.json();
+    const body = JSON.parse(rawBody);
     const { triggerEvent, payload } = body;
 
     console.log(`[Cal.com Webhook] Event: ${triggerEvent}`);
