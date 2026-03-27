@@ -2,7 +2,7 @@
 
 import { AnimatedSection } from './AnimatedSection';
 import { motion } from 'motion/react';
-import { WHATSAPP_URL } from '@/lib/whatsapp';
+
 
 export function FinalCta() {
   return (
@@ -14,18 +14,16 @@ export function FinalCta() {
               ¿Listo para que tu WhatsApp trabaje por ti?
             </h2>
             <p className="text-lg lg:text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-              Agenda una demo gratuita y mira cómo tu bot de WhatsApp con IA precalifica leads mientras duermes.
+              Agenda una asesoría gratuita y mira cómo tu bot de WhatsApp con IA precalifica leads mientras duermes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
-                href={WHATSAPP_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#agendar"
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-haiku-mint text-lg font-semibold rounded-full hover:bg-gray-100 transition-colors"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                Agenda tu Demo Gratis
+                Agenda tu Asesoría Gratis
               </motion.a>
               <a
                 href="#recursos"
@@ -35,7 +33,7 @@ export function FinalCta() {
               </a>
             </div>
             <p className="text-sm text-white/60 mt-6">
-              Sin compromiso · Pagas a fin de mes solo si funciona · Respondemos en menos de 24h
+              Sin compromiso · Pagas a fin de mes solo si funciona · 30 min que valen la pena
             </p>
           </div>
         </AnimatedSection>

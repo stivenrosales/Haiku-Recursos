@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 import { AnimatedSection } from './AnimatedSection';
-import { WHATSAPP_URL } from '@/lib/whatsapp';
+
 
 const faqs = [
   {
@@ -40,12 +40,12 @@ const faqs = [
     answer: 'Sí. Incluimos soporte y optimización continua. Monitoreamos las conversaciones, ajustamos respuestas y mejoramos el agente constantemente para maximizar tus conversiones.',
   },
   {
-    question: '¿Qué es la integración con CAPI de Meta?',
-    answer: 'Cuando el bot agenda una reunión, envía automáticamente esa conversión a Meta (Facebook/Instagram) vía Conversions API. Esto permite que Meta optimice tus campañas para traerte leads más calificados, no solo clics. El resultado: mejor rendimiento de tus anuncios con el mismo presupuesto.',
+    question: '¿Funciona con cualquier tipo de negocio?',
+    answer: 'Sí. Funciona especialmente bien para agencias, consultorías, coaches y negocios de servicios que reciben consultas por WhatsApp y necesitan responder rápido, calificar leads y agendar reuniones.',
   },
   {
     question: '¿Cómo empiezo?',
-    answer: 'Agenda una demo gratuita y te mostramos el agente en acción con un ejemplo personalizado para tu negocio. Sin compromiso. También puedes descargar nuestros recursos gratuitos para empezar a optimizar tus ventas.',
+    answer: 'Agenda una asesoría gratuita y te mostramos el agente en acción con un ejemplo personalizado para tu negocio. Sin compromiso. También puedes descargar nuestros recursos gratuitos para empezar a optimizar tus ventas.',
   },
 ];
 
@@ -68,12 +68,10 @@ export function FaqSection() {
               Respondemos las dudas más comunes sobre nuestro agente IA de ventas.
             </p>
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#agendar"
               className="inline-flex items-center justify-center px-6 py-3 bg-haiku-mint text-white font-semibold rounded-full hover:bg-[#009160] transition-colors text-sm"
             >
-              ¿Más preguntas? Escríbenos
+              ¿Más preguntas? Conversemos
             </a>
           </AnimatedSection>
 

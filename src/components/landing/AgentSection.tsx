@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { AnimatedSection } from './AnimatedSection';
 import { motion, AnimatePresence, useReducedMotion, useInView } from 'motion/react';
 import { MessageCircle, Clock, TrendingUp, Bot, CheckCircle, DollarSign, ImageIcon, Zap, BarChart3, CalendarCheck, Rocket } from 'lucide-react';
-import { WHATSAPP_URL } from '@/lib/whatsapp';
+
 
 // --- Chat sequence types ---
 type ChatStep =
@@ -52,8 +52,8 @@ const features = [
   },
   {
     icon: TrendingUp,
-    title: 'CAPI de Meta incluido',
-    description: 'Cada reunión agendada envía feedback a Meta Ads para optimizar tus campañas y traer mejores leads.',
+    title: 'Optimiza tus campañas',
+    description: 'Cada reunión agendada es un dato más para entender qué campañas traen mejores leads.',
   },
   {
     icon: Rocket,
@@ -457,7 +457,7 @@ export function AgentSection() {
                 Tu WhatsApp atiende, califica y agenda por ti
               </h2>
               <p className="text-lg text-white/60 leading-relaxed mb-8 max-w-lg">
-                Un bot con IA que responde 24/7, precalifica leads de tus campañas de Meta Ads, agenda reuniones y envía conversiones vía CAPI para optimizar tus anuncios. Listo en 1 semana.
+                Un bot con IA que responde 24/7, precalifica leads, agenda reuniones y te deja listo para cerrar. Listo en 1 semana.
               </p>
             </AnimatedSection>
 
@@ -484,13 +484,11 @@ export function AgentSection() {
             <AnimatedSection delay={0.15}>
               <div className="flex flex-wrap items-center gap-4">
                 <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#agendar"
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] transition-colors"
                 >
-                  <WhatsAppIcon />
-                  Agenda una Demo Gratis
+                  <CalendarCheck className="w-5 h-5" />
+                  Agenda tu Asesoría Gratis
                 </a>
                 <a
                   href="/planes"

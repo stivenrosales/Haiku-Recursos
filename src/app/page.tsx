@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { prisma } from '@/lib/prisma';
 import { Navbar } from '@/components/landing/Navbar';
 import { HeroSection } from '@/components/landing/HeroSection';
+import { CalendarSection } from '@/components/landing/CalendarSection';
 import { ResourcesShowcase } from '@/components/landing/ResourcesShowcase';
 import { YouTubeVideos } from '@/components/landing/YouTubeVideos';
 import { SocialProof } from '@/components/landing/SocialProof';
@@ -75,6 +76,7 @@ export default async function HomePage() {
       <Navbar />
       <main>
         <HeroSection />
+        <CalendarSection />
         <SocialProof />
         <AgentSection />
         <BenefitsSection />

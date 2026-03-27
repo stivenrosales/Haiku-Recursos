@@ -16,7 +16,7 @@ import {
   ChevronDown,
   Globe,
 } from 'lucide-react';
-import { WHATSAPP_URL } from '@/lib/whatsapp';
+const CAL_URL = 'https://cal.com/stiven-rosales-htfs7i/asesoria';
 
 /* ── Promise Strip cards ── */
 const promises = [
@@ -73,7 +73,7 @@ const planProPE: Plan = {
     { text: 'Soporte lunes a viernes en horario laboral', highlight: false, suffix: '' },
   ],
   cta: 'Empezar con Pro',
-  setup: 'Setup gratis para los primeros 10 clientes (compromiso mín. 3 meses). Después S/ 997 o gratis con compromiso de 4 meses.',
+  setup: 'Setup gratis para los primeros 10 negocios. Primer mes gratis si no te funciona.',
 };
 
 const planScalePE: Plan = {
@@ -93,7 +93,7 @@ const planScalePE: Plan = {
     { text: 'Optimización mensual', highlight: true, suffix: ' — revisión de conversaciones y mejora de prompts' },
   ],
   cta: 'Empezar con Scale',
-  setup: 'Setup gratis para los primeros 10 clientes (compromiso 3 meses). Después S/ 1,997 o gratis con compromiso de 6 meses.',
+  setup: 'Setup gratis para los primeros 10 negocios. Primer mes gratis si no te funciona.',
 };
 
 const planEnterprisePE: EnterprisePlan = {
@@ -130,7 +130,7 @@ const planProINTL: Plan = {
     { text: 'Soporte lunes a viernes en horario laboral', highlight: false, suffix: '' },
   ],
   cta: 'Empezar con Pro',
-  setup: 'Setup gratis para los primeros 10 clientes (compromiso mín. 3 meses). Después $297 o gratis con compromiso de 4 meses.',
+  setup: 'Setup gratis para los primeros 10 negocios. Primer mes gratis si no te funciona.',
 };
 
 const planScaleINTL: Plan = {
@@ -150,7 +150,7 @@ const planScaleINTL: Plan = {
     { text: 'Optimización mensual', highlight: true, suffix: ' — revisión de conversaciones y mejora de prompts' },
   ],
   cta: 'Empezar con Scale',
-  setup: 'Setup gratis para los primeros 10 clientes (compromiso 3 meses). Después $597 o gratis con compromiso de 6 meses.',
+  setup: 'Setup gratis para los primeros 10 negocios. Primer mes gratis si no te funciona.',
 };
 
 const planEnterpriseINTL: EnterprisePlan = {
@@ -266,12 +266,10 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
             <span className="font-display text-2xl font-bold text-haiku-black">Haiku Business</span>
           </a>
           <a
-            href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+            href={CAL_URL}
             className="px-6 py-2.5 bg-haiku-mint text-white text-sm font-semibold rounded-full hover:bg-[#009160] transition-colors"
           >
-            Agenda una Demo
+            Agenda tu Asesoría
           </a>
         </div>
       </nav>
@@ -316,12 +314,10 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
                 <ChevronDown className="w-5 h-5" />
               </a>
               <a
-                href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                href={CAL_URL}
                 className="inline-flex items-center justify-center px-8 py-4 border-2 border-haiku-black text-haiku-black text-lg font-semibold rounded-full hover:bg-haiku-black hover:text-white hover:-translate-y-0.5 transition-all"
               >
-                Agenda tu Demo Gratis
+                Agenda tu Asesoría Gratis
               </a>
             </div>
           </AnimatedSection>
@@ -361,7 +357,7 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
                 Elige el plan que hace crecer tu negocio
               </h2>
               <p className="text-lg text-gray-600 max-w-xl mx-auto">
-                Setup gratis para los primeros 10 clientes. Sin sorpresas, sin letra chica.
+                Setup gratis para los primeros 10 negocios. Primer mes gratis si no te funciona.
               </p>
 
               {/* ── Region toggle ── */}
@@ -419,9 +415,7 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
 
                 <div className="px-7 pb-7">
                   <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={CAL_URL}
                     className="flex items-center justify-center w-full px-6 py-3.5 bg-haiku-mint text-white font-semibold rounded-full hover:bg-[#009160] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,168,107,0.3)] transition-all"
                   >
                     {planPro.cta}
@@ -470,9 +464,7 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
 
                 <div className="px-7 pb-7">
                   <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={CAL_URL}
                     className="flex items-center justify-center w-full px-6 py-3.5 bg-white text-haiku-black font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 transition-all"
                   >
                     {planScale.cta}
@@ -509,9 +501,7 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
 
                 <div className="px-7 pb-7">
                   <a
-                    href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={CAL_URL}
                     className="flex items-center justify-center w-full px-6 py-3.5 border-2 border-haiku-black text-haiku-black font-semibold rounded-full hover:bg-haiku-black hover:text-white hover:-translate-y-0.5 transition-all"
                   >
                     {planEnterprise.cta}
@@ -535,15 +525,13 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
                   En Enterprise, todo se ajusta a tu operación. Cuéntanos tu volumen y diseñamos la solución perfecta para tu negocio.
                 </p>
                 <a
-                  href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  href={CAL_URL}
                   className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-haiku-black text-lg font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.15)] transition-all"
                 >
                   Cotizar Enterprise
                   <ArrowRight className="w-5 h-5" />
                 </a>
-                <p className="text-white/50 text-sm mt-4">Respondemos en menos de 24h</p>
+                <p className="text-white/50 text-sm mt-4">Te asesoramos en una llamada de 30 min</p>
               </div>
             </div>
           </AnimatedSection>
@@ -650,19 +638,17 @@ export function PlanesContent({ isPeru: initialIsPeru }: { isPeru: boolean }) {
                 ¿Listo para que tu WhatsApp trabaje por ti?
               </h2>
               <p className="text-lg text-white/80 max-w-xl mx-auto mb-8 relative">
-                Agenda una demo gratuita. Te mostramos cómo funciona con tu negocio real en 30 minutos.
+                Agenda una asesoría gratuita. Te mostramos cómo funciona con tu negocio real en 30 minutos.
               </p>
               <a
-                href={WHATSAPP_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                href={CAL_URL}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-haiku-mint text-lg font-semibold rounded-full hover:bg-gray-100 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,0,0,0.15)] transition-all relative"
               >
-                Agenda tu Demo Gratis
+                Agenda tu Asesoría Gratis
                 <ArrowRight className="w-5 h-5" />
               </a>
               <p className="text-sm text-white/55 mt-5 relative">
-                Pagas a fin de mes solo si funciona · Respondemos en menos de 24h
+                Pagas a fin de mes solo si funciona · 30 min que valen la pena
               </p>
             </div>
           </AnimatedSection>

@@ -89,7 +89,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li><a href="/#agente" className="text-gray-400 hover:text-white text-sm transition-colors">Agente WhatsApp IA</a></li>
               <li><a href="/#testimonios" className="text-gray-400 hover:text-white text-sm transition-colors">Testimonios</a></li>
-              <li><a href="https://wa.me/51944138721?text=Hola%2C%20quiero%20saber%20m%C3%A1s%20sobre%20los%20bots%20de%20WhatsApp%20con%20IA" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white text-sm transition-colors">Contacto</a></li>
+              <li><a href="/#agendar" className="text-gray-400 hover:text-white text-sm transition-colors">Agendar Asesoría</a></li>
               <li><a href="/privacidad" className="text-gray-400 hover:text-white text-sm transition-colors">Política de Privacidad</a></li>
               <li><a href="/eliminacion-datos" className="text-gray-400 hover:text-white text-sm transition-colors">Eliminación de Datos</a></li>
             </ul>

@@ -2,7 +2,7 @@
 
 import { AnimatedSection } from './AnimatedSection';
 import { Clock, MessageCircle, TrendingUp, Bot, Zap, BarChart3 } from 'lucide-react';
-import { WHATSAPP_URL } from '@/lib/whatsapp';
+
 
 const benefits = [
   {
@@ -74,12 +74,10 @@ export function BenefitsSection() {
         <AnimatedSection delay={0.3}>
           <div className="text-center mt-12">
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#agendar"
               className="inline-flex items-center justify-center px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,168,107,0.3)] transition-all"
             >
-              Agenda tu Demo Gratis
+              Agenda tu Asesoría Gratis
             </a>
             <p className="text-sm text-gray-500 mt-3">
               Pagas a fin de mes solo si funciona. Sin riesgo.

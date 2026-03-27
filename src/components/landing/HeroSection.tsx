@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'motion/react';
-import { WHATSAPP_URL } from '@/lib/whatsapp';
+
 
 const container = {
   hidden: {},
@@ -143,14 +143,12 @@ export function HeroSection() {
             <Item {...itemProps}>
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <motion.a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#agendar"
                   className="inline-flex items-center justify-center px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] transition-colors"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.03 }}
                   whileTap={shouldReduceMotion ? {} : { scale: 0.98 }}
                 >
-                  Agenda tu Demo Gratis
+                  Agenda tu Asesoría Gratis
                 </motion.a>
                 <a
                   href="/planes"

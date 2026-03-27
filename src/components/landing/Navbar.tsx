@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { WHATSAPP_URL } from '@/lib/whatsapp';
+
 
 const navLinks = [
   { label: 'Agente IA', href: '#agente' },
@@ -48,12 +48,10 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#agendar"
               className="px-6 py-2.5 bg-haiku-mint text-white text-sm font-semibold rounded-full hover:bg-[#009160] transition-all"
             >
-              Agenda tu Demo
+              Agenda tu Asesoría
             </a>
           </div>
 
@@ -83,13 +81,11 @@ export function Navbar() {
               </a>
             ))}
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#agendar"
               onClick={() => setMobileOpen(false)}
               className="block w-full text-center px-6 py-3 bg-haiku-mint text-white font-semibold rounded-full hover:bg-[#009160] transition-all"
             >
-              Agenda tu Demo
+              Agenda tu Asesoría
             </a>
           </div>
         </div>

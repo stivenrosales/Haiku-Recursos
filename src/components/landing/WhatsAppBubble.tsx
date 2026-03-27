@@ -41,9 +41,7 @@ export function WhatsAppBubble() {
               <X className="w-3 h-3 text-gray-600" />
             </button>
             <p className="text-sm text-gray-700 leading-relaxed">
-              <span className="font-semibold text-haiku-black">¿Tienes preguntas?</span>
-              <br />
-              Escríbenos por WhatsApp y te respondemos al instante.
+              Agenda por WhatsApp con <span className="font-semibold text-haiku-black">Hana</span>, nuestra IA
             </p>
           </motion.div>
         )}
@@ -54,7 +52,7 @@ export function WhatsAppBubble() {
         href={WHATSAPP_URL}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Contactar por WhatsApp"
+        aria-label="Agendar por WhatsApp"
         className="group relative"
       >
         {/* Pulse ring */}
