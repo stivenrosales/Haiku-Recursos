@@ -76,7 +76,7 @@ export function CalendarSection() {
             )}
             <Cal
               calLink="stiven-rosales-htfs7i/asesoria"
-              style={{ width: '100%', height: '100%', overflow: 'auto' }}
+              style={{ width: '100%', minHeight: '750px', overflow: 'visible' }}
               config={{
                 layout: 'month_view',
                 theme: 'light',
