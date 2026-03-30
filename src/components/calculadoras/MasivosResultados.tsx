@@ -46,7 +46,7 @@ export function MasivosResultados({ resultado, contactos, onRecalcular }: Masivo
                 : 'Con estos números, los ads te rinden más por ahora'}
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              Enviar {contactos.toLocaleString()} mensajes te cuesta {formatUSD(r.costoEnvio)} ({formatUSD(r.costoTemplatePais)} por mensaje).
+              Enviar {contactos.toLocaleString()} mensajes con Haiku te cuesta {formatUSD(r.costoTotalConHaiku)} en total (Meta + plataforma).
               {' '}De esos contactos, esperamos recuperar {r.leadsRecuperados.toLocaleString()} leads.
             </p>
             {conviene ? (
@@ -57,7 +57,7 @@ export function MasivosResultados({ resultado, contactos, onRecalcular }: Masivo
             ) : (
               <p className="text-gray-700 leading-relaxed">
                 Tu costo por lead en ads es {formatUSD(r.cpl)}, y reactivando sale a {formatUSD(r.costoPorLeadReactivado)} por lead.
-                {' '}Podrías mejorar esto subiendo la tasa de recuperación o bajando el costo por template.
+                {' '}Podrías mejorar esto con más contactos o una mayor tasa de recuperación.
               </p>
             )}
           </div>
@@ -120,7 +120,7 @@ export function MasivosResultados({ resultado, contactos, onRecalcular }: Masivo
             ${r.roi}
           </p>
           <p className="text-gray-500 mt-3 text-sm max-w-md mx-auto">
-            Inviertes {formatUSD(r.costoEnvio)} en el envío y generas {formatUSD(r.ingresosRecuperacion)} en ingresos potenciales.
+            Inviertes {formatUSD(r.costoTotalConHaiku)} en total y generas {formatUSD(r.ingresosRecuperacion)} en ingresos potenciales.
           </p>
         </motion.div>
       )}
@@ -148,7 +148,7 @@ export function MasivosResultados({ resultado, contactos, onRecalcular }: Masivo
           <tbody>
             <tr className="border-b border-gray-50">
               <td className="text-sm text-gray-700 px-6 py-3">Costo total</td>
-              <td className="text-sm text-gray-900 text-right px-6 py-3">{formatUSD(r.costoEnvio)}</td>
+              <td className="text-sm text-gray-900 text-right px-6 py-3">{formatUSD(r.costoTotalConHaiku)}</td>
               <td className="text-sm text-gray-900 text-right px-6 py-3">{formatUSD(r.costoEquivalenteAds)}</td>
             </tr>
             <tr className="border-b border-gray-50">

@@ -126,24 +126,24 @@ export function calcularMasivos(
   const ventasRecuperacion = Math.round(leadsRecuperados * config.tasaCierreRecuperados);
   const ingresosRecuperacion = ventasRecuperacion * inputs.precioPromedio;
 
-  // Comparación con ads
+  // Plan Haiku
+  const plan = recomendarPlanMasivos(inputs.contactos);
+  const costoTotalConHaiku = costoEnvio + plan.costoTotal;
+
+  // Comparación con ads — usa costo real (Meta + Haiku)
   const cpl = inputs.leadsNuevosMes > 0
     ? inputs.gastoMensualAds / inputs.leadsNuevosMes
     : 0;
   const costoEquivalenteAds = leadsRecuperados * cpl;
   const costoPorLeadReactivado = leadsRecuperados > 0
-    ? costoEnvio / leadsRecuperados
+    ? costoTotalConHaiku / leadsRecuperados
     : 0;
-  const ahorro = costoEquivalenteAds - costoEnvio;
+  const ahorro = costoEquivalenteAds - costoTotalConHaiku;
 
-  // ROI
-  const roi = costoEnvio > 0
-    ? ingresosRecuperacion / costoEnvio
+  // ROI — ingresos vs inversión total real
+  const roi = costoTotalConHaiku > 0
+    ? ingresosRecuperacion / costoTotalConHaiku
     : 0;
-
-  // Plan Haiku
-  const plan = recomendarPlanMasivos(inputs.contactos);
-  const costoTotalConHaiku = costoEnvio + plan.costoTotal;
 
   return {
     costoEnvio: Math.round(costoEnvio * 100) / 100,
