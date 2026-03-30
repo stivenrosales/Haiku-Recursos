@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
-import { AlertTriangle, TrendingUp, CheckCircle, ArrowRight, Bot } from 'lucide-react';
+import { AlertTriangle, TrendingUp, CheckCircle, ArrowRight, Bot, Clock, Sun, Moon, UserX } from 'lucide-react';
 import type { ResultadoCalculadora } from '@/lib/calculadora-punto-de-quiebre';
 
 interface ResultadosDisplayProps {
@@ -100,12 +100,95 @@ export function ResultadosDisplay({ resultado, onRecalcular }: ResultadosDisplay
         </div>
       </motion.div>
 
-      {/* 2. Cuánto te cuesta — la cifra que duele */}
+      {/* 2. Flujo de leads — qué pasa con cada lead */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.15 }}
+        className="bg-white rounded-2xl border border-gray-200 p-6 md:p-8"
+      >
+        <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-6">
+          ¿Qué pasa con tus {actual.leadsDiurnos + actual.leadsFueraHorario} leads al día?
+        </h4>
+
+        <div className="space-y-4">
+          {/* Paso 1: Distribución */}
+          <div className="grid sm:grid-cols-2 gap-3">
+            <div className="flex items-start gap-3 bg-emerald-50 rounded-xl p-4">
+              <Sun className="text-emerald-600 shrink-0 mt-0.5" size={20} />
+              <div>
+                <p className="text-2xl font-bold text-emerald-700">{actual.leadsDiurnos}</p>
+                <p className="text-sm text-gray-600">llegan en tu horario laboral</p>
+                <p className="text-xs text-gray-400 mt-1">Leads calientes — escriben y esperan respuesta ya</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 bg-amber-50 rounded-xl p-4">
+              <Moon className="text-amber-600 shrink-0 mt-0.5" size={20} />
+              <div>
+                <p className="text-2xl font-bold text-amber-700">{actual.leadsFueraHorario}</p>
+                <p className="text-sm text-gray-600">llegan fuera de horario</p>
+                <p className="text-xs text-gray-400 mt-1">Se enfrían esperando — rinden ÷3 al día siguiente</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Paso 2: Qué hace tu equipo */}
+          <div className="border-t border-gray-100 pt-4">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+              Tu equipo ({actual.capacidadDia} conversaciones/día de capacidad)
+            </p>
+            <div className="space-y-2">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-amber-500 shrink-0" />
+                <p className="text-sm text-gray-700">
+                  Revive <strong>{actual.coldAtendidos} leads fríos</strong> de anoche
+                  <span className="text-gray-400"> — gasta {actual.coldAtendidos} de {actual.capacidadDia} slots</span>
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                <p className="text-sm text-gray-700">
+                  Atiende <strong>{actual.hotAtendidos} leads calientes</strong> del día
+                  {actual.hotAtendidos < actual.leadsDiurnos && (
+                    <span className="text-red-500"> — solo alcanza para {actual.hotAtendidos} de {actual.leadsDiurnos}</span>
+                  )}
+                </p>
+              </div>
+              {actual.leadsNoAtendidos > 0 && (
+                <div className="flex items-center gap-3">
+                  <UserX className="text-red-500 shrink-0" size={14} />
+                  <p className="text-sm text-red-600 font-medium">
+                    {actual.leadsNoAtendidos} leads se quedan sin atender — nadie les contesta
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Paso 3: Resultado */}
+          <div className="border-t border-gray-100 pt-4">
+            <div className="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+              <div>
+                <p className="text-sm text-gray-600">Tasa de cierre real</p>
+                <p className="text-xs text-gray-400">Combinando leads calientes y fríos</p>
+              </div>
+              <p className="text-2xl font-bold text-gray-900">
+                {(actual.tasaCierreEfectiva * 100).toFixed(1)}%
+                <span className="text-sm font-normal text-gray-400 ml-2">
+                  vs {(bot.tasaCierre * 100).toFixed(0)}% con bot
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* 3. Cuánto te cuesta — la cifra que duele */}
       {dineroQuePierdes > 0 && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.25 }}
           className="text-center py-8 px-6 bg-white rounded-2xl border border-gray-200 shadow-sm"
         >
           <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
@@ -121,11 +204,11 @@ export function ResultadosDisplay({ resultado, onRecalcular }: ResultadosDisplay
         </motion.div>
       )}
 
-      {/* 3. Comparación: tu inversión hoy vs con Haiku */}
+      {/* 4. Comparación: tu inversión hoy vs con Haiku */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.35 }}
         className="bg-white rounded-2xl border border-gray-200 overflow-hidden"
       >
         <div className="px-6 py-4 border-b border-gray-100">
@@ -183,11 +266,11 @@ export function ResultadosDisplay({ resultado, onRecalcular }: ResultadosDisplay
         </table>
       </motion.div>
 
-      {/* 4. Plan recomendado — la inversión concreta */}
+      {/* 5. Plan recomendado — la inversión concreta */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.45 }}
         className="bg-gray-50 rounded-2xl border border-gray-200 p-6"
       >
         <div className="flex items-center gap-3 mb-4">
@@ -219,7 +302,7 @@ export function ResultadosDisplay({ resultado, onRecalcular }: ResultadosDisplay
         </p>
       </motion.div>
 
-      {/* 5. CTA */}
+      {/* 6. CTA */}
       <div className="text-center space-y-4 pt-4">
         {veredicto === 'superado' || veredicto === 'cerca' ? (
           <a
