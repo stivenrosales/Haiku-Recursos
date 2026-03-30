@@ -133,7 +133,7 @@ export function InputsForm({ onCalculate }: InputsFormProps) {
           min={0}
         />
         <NumberField
-          label="Ticket promedio de venta"
+          label="Precio promedio de lo que vendes"
           value={ticketPromedio}
           onChange={setTicketPromedio}
           prefix="S/."

@@ -16,7 +16,7 @@ function formatMoney(n: number): string {
 function buildVeredictoContent(resultado: ResultadoCalculadora) {
   const { actual, bot, veredicto } = resultado;
   const capacidad = actual.capacidadDia;
-  const leads = actual.leadsAtendidos + actual.leadsNoAtendidos + actual.leadsNocturnos;
+  const leads = actual.leadsDiurnos + actual.leadsFueraHorario;
 
   if (veredicto === 'superado') {
     return {
@@ -26,8 +26,8 @@ function buildVeredictoContent(resultado: ResultadoCalculadora) {
       titulo: 'Ya pasaste tu punto de quiebre',
       parrafos: [
         `Recibes ${leads} leads al día, pero tu equipo solo puede atender ${capacidad}. ${actual.leadsNoAtendidos > 0 ? `Eso son ${actual.leadsNoAtendidos} leads al día que nadie contesta.` : ''}`,
-        actual.leadsNocturnos > 0
-          ? `Además, ${actual.leadsNocturnos} leads llegan fuera de horario y se enfrían. Un lead que espera más de 5 minutos tiene 80% menos probabilidad de comprar — y estos esperan horas.`
+        actual.leadsFueraHorario > 0
+          ? `Además, ${actual.leadsFueraHorario} leads llegan fuera de tu horario laboral y se enfrían. Un lead que espera más de 5 minutos tiene 80% menos probabilidad de comprar — y estos esperan horas.`
           : null,
         `Tu tasa de cierre real es ${(actual.tasaCierreEfectiva * 100).toFixed(1)}%, cuando con atención inmediata 24/7 podría ser ${(bot.tasaCierre * 100).toFixed(0)}%.`,
       ].filter(Boolean) as string[],
@@ -41,9 +41,9 @@ function buildVeredictoContent(resultado: ResultadoCalculadora) {
       bg: 'bg-amber-50 border-amber-200',
       titulo: 'Estás a punto de pasarlo',
       parrafos: [
-        `Tu equipo atiende ${capacidad} leads al día y recibes ${leads}. Todavía aguanta, pero un poco más de volumen y empiezas a perder leads.`,
-        actual.leadsNocturnos > 0
-          ? `Ya tienes ${actual.leadsNocturnos} leads nocturnos al día que llegan fríos al día siguiente. Esos leads cuestan lo mismo en ads pero rinden mucho menos.`
+        `Tu equipo puede atender ${capacidad} leads al día y recibes ${leads}. Todavía aguanta, pero un poco más de volumen y empiezas a perder leads.`,
+        actual.leadsFueraHorario > 0
+          ? `Ya tienes ${actual.leadsFueraHorario} leads al día que llegan fuera de horario y se enfrían. Esos leads cuestan lo mismo en ads pero rinden mucho menos.`
           : null,
         `Hoy cierras al ${(actual.tasaCierreEfectiva * 100).toFixed(1)}%. Con atención inmediata 24/7, podrías cerrar al ${(bot.tasaCierre * 100).toFixed(0)}%.`,
       ].filter(Boolean) as string[],
@@ -57,8 +57,8 @@ function buildVeredictoContent(resultado: ResultadoCalculadora) {
     titulo: 'Tu equipo aún da abasto',
     parrafos: [
       `Recibes ${leads} leads al día y tu equipo puede atender ${capacidad}. Aún tienes margen.`,
-      actual.leadsNocturnos > 0
-        ? `Pero ${actual.leadsNocturnos} leads llegan fuera de horario y se enfrían. Ahí ya estás dejando plata.`
+      actual.leadsFueraHorario > 0
+        ? `Pero ${actual.leadsFueraHorario} leads llegan fuera de horario y se enfrían. Ahí ya estás dejando plata.`
         : null,
       `Hoy cierras al ${(actual.tasaCierreEfectiva * 100).toFixed(1)}%. Incluso sin haber pasado tu punto de quiebre, mira cuánto más podrías facturar:`,
     ].filter(Boolean) as string[],
