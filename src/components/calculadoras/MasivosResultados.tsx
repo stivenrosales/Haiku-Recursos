@@ -105,23 +105,33 @@ export function MasivosResultados({ resultado, contactos, onRecalcular }: Masivo
         </div>
       </motion.div>
 
-      {/* 3. ROI hero */}
+      {/* 3. ROI — hero si conviene, dato secundario si no */}
       {r.roi > 0 && (
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.25 }}
-          className="text-center py-8 px-6 bg-white rounded-2xl border border-gray-200 shadow-sm"
+          className={`text-center px-6 bg-white rounded-2xl border border-gray-200 ${
+            conviene ? 'py-8 shadow-sm' : 'py-5'
+          }`}
         >
-          <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
-            Por cada dólar que inviertes en el envío
-          </p>
-          <p className="text-5xl md:text-6xl font-display font-bold text-emerald-600">
-            ${r.roi}
-          </p>
-          <p className="text-gray-500 mt-3 text-sm max-w-md mx-auto">
-            Inviertes {formatUSD(r.costoTotalConHaiku)} en total y generas {formatUSD(r.ingresosRecuperacion)} en ingresos potenciales.
-          </p>
+          {conviene ? (
+            <>
+              <p className="text-sm font-medium text-gray-500 uppercase tracking-wide mb-2">
+                Por cada dólar que inviertes
+              </p>
+              <p className="text-5xl md:text-6xl font-display font-bold text-emerald-600">
+                ${r.roi}
+              </p>
+              <p className="text-gray-500 mt-3 text-sm max-w-md mx-auto">
+                Inviertes {formatUSD(r.costoTotalConHaiku)} en total y generas {formatUSD(r.ingresosRecuperacion)} en ingresos potenciales.
+              </p>
+            </>
+          ) : (
+            <p className="text-sm text-gray-500">
+              Aún así, por cada dólar invertido recuperas <span className="font-semibold text-gray-700">${r.roi}</span> — inviertes {formatUSD(r.costoTotalConHaiku)} y generas {formatUSD(r.ingresosRecuperacion)} en ingresos potenciales.
+            </p>
+          )}
         </motion.div>
       )}
 
