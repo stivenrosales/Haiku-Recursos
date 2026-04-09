@@ -101,3 +101,14 @@ model Booking {
   @@index([fechaReunion])
   @@index([estado])
 }
+
+model Propuesta {
+  id              String   @id @default(cuid())
+  slug            String   @unique @default(uuid())
+  clienteNombre   String
+  servicios       Json
+  vigenciaHasta   DateTime
+  creadoEl        DateTime @default(now())
+
+  @@index([slug])
+}
