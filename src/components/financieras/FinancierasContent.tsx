@@ -143,7 +143,7 @@ const planFeatures = [
 
 /* -- Consumption costs -- */
 const consumptionCosts = [
-  { concept: 'Conversación IA (Gemini 3 Flash)', unit: '~S/ 0.057', bulk: '~S/ 57' },
+  { concept: 'Conversación IA (vía OpenRouter)', unit: '~S/ 0.057', bulk: '~S/ 57' },
   { concept: 'Plantilla marketing (campañas masivas)', unit: '~S/ 0.27', bulk: '~S/ 267' },
   { concept: 'Plantilla utilidad (confirmaciones, recordatorios)', unit: '~S/ 0.076', bulk: '~S/ 76' },
 ];
@@ -173,7 +173,7 @@ const faqs = [
   {
     question: '¿Cómo se paga el consumo de IA y plantillas?',
     answer:
-      'El plan base es S/ 500/mes fijo. El consumo de IA (Gemini) y plantillas (Meta) se cobra aparte según uso real, como un servicio de luz. Todo transparente desde la plataforma.',
+      'El plan base es S/ 500/mes fijo. Para la IA, te creamos una cuenta en OpenRouter donde gestionás tu propio consumo directamente. Las plantillas de WhatsApp se facturan mensualmente — te informamos cuánto fue el uso del mes.',
   },
   {
     question: '¿Incluye capacitación?',
@@ -643,7 +643,7 @@ export function FinancierasContent() {
                   El uso se paga como la luz
                 </h4>
                 <p className="text-sm text-gray-500 mb-5">
-                  Según lo que consumas. Transparente y sin sorpresas.
+                  La IA se paga vía OpenRouter (te creamos tu cuenta). Las plantillas se facturan mensualmente.
                 </p>
 
                 <div className="overflow-x-auto">
@@ -676,7 +676,7 @@ export function FinancierasContent() {
                 </div>
 
                 <p className="text-xs text-gray-400 mt-4">
-                  Las plantillas se pagan directamente a Meta a través de nuestra plataforma.
+                  La IA se gestiona desde tu cuenta de OpenRouter. Las plantillas de WhatsApp se facturan mensualmente.
                 </p>
               </div>
             </AnimatedSection>
