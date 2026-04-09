@@ -187,8 +187,375 @@ export function FinancierasContent() {
 
   return (
     <>
-      {/* Sections will be added in subsequent tasks */}
-      <div>Haiku Fin — placeholder</div>
+      {/* -- NAV -- */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-haiku-beige/85 backdrop-blur-xl border-b border-black/[0.04]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16">
+          <a href="/" className="flex items-center gap-2 group">
+            <ArrowLeft className="w-4 h-4 text-gray-400 group-hover:text-haiku-mint transition-colors" />
+            <span className="font-display text-2xl font-bold text-haiku-black">Haiku Fin</span>
+          </a>
+          <a
+            href={WA_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2.5 bg-haiku-mint text-white text-sm font-semibold rounded-full hover:bg-[#009160] transition-colors"
+          >
+            Escríbenos por WhatsApp
+          </a>
+        </div>
+      </nav>
+
+      {/* -- HERO -- */}
+      <section className="pt-32 pb-16 lg:pt-40 lg:pb-20 text-center relative overflow-hidden">
+        <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(0,168,107,0.08)_0%,transparent_70%)] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative">
+          <AnimatedSection>
+            <div className="inline-flex items-center gap-2 px-5 py-2 bg-haiku-mint/10 rounded-full mb-6">
+              <span className="w-2 h-2 bg-haiku-mint rounded-full animate-pulse" />
+              <span className="text-sm font-medium text-haiku-mint">WhatsApp IA para Financieras</span>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.1}>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-haiku-black leading-[1.1] mb-5">
+              Tus analistas deberían{' '}
+              <span className="text-haiku-mint">
+                cerrar créditos,
+                <br className="hidden sm:block" /> no filtrar curiosos.
+              </span>
+            </h1>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.2}>
+            <p className="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+              Un agente de IA en WhatsApp que precalifica leads, consulta en Equifax,
+              recopila documentos y hace seguimiento automático. Tus analistas solo
+              reciben personas listas para cerrar.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.3}>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href={WA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,168,107,0.3)] transition-all"
+              >
+                Escríbenos por WhatsApp
+                <MessageCircle className="w-5 h-5" />
+              </a>
+              <a
+                href="#como-funciona"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-haiku-black text-haiku-black text-lg font-semibold rounded-full hover:bg-haiku-black hover:text-white hover:-translate-y-0.5 transition-all"
+              >
+                Ver cómo funciona
+                <ChevronDown className="w-5 h-5 ml-2" />
+              </a>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* -- METRICS -- */}
+      <section className="pb-12 lg:pb-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {metrics.map((m, i) => (
+              <AnimatedSection key={m.value} delay={i * 0.08}>
+                <div className="bg-white rounded-[24px] p-8 text-center shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.1)] transition-all">
+                  <div className="w-12 h-12 bg-haiku-mint/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <m.icon className="w-6 h-6 text-haiku-mint" />
+                  </div>
+                  <p className="font-display text-3xl font-bold text-haiku-black mb-1">
+                    {m.value}
+                  </p>
+                  <h3 className="font-display text-sm font-semibold text-haiku-black mb-1">
+                    {m.label}
+                  </h3>
+                  <p className="text-sm text-gray-500">{m.detail}</p>
+                  <p className="text-xs text-gray-400 mt-2">{m.source}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* -- HOW IT WORKS -- */}
+      <section id="como-funciona" className="py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold tracking-widest text-haiku-mint uppercase mb-3">
+                Cómo funciona
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-haiku-black leading-[1.15] mb-4">
+                De campaña masiva a crédito cerrado,
+                <br className="hidden sm:block" /> sin perder un solo lead
+              </h2>
+              <p className="text-lg text-gray-600 max-w-xl mx-auto">
+                Todo pasa en WhatsApp. Sin apps extra, sin fricciones.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {steps.map((step, i) => (
+              <AnimatedSection key={step.number} delay={i * 0.1}>
+                <div className="bg-white rounded-[24px] p-7 shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.1)] transition-all h-full">
+                  <span className="text-sm font-bold text-haiku-mint/40 font-display">
+                    {step.number}
+                  </span>
+                  <div className="w-12 h-12 bg-haiku-mint/10 rounded-2xl flex items-center justify-center mt-3 mb-4">
+                    <step.icon className="w-6 h-6 text-haiku-mint" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-haiku-black mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-500 leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* -- FEATURES -- */}
+      <section className="py-16 lg:py-20 bg-haiku-black relative overflow-hidden">
+        <div className="absolute top-[-200px] right-[-200px] w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,168,107,0.12)_0%,transparent_70%)] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative">
+          <AnimatedSection>
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold tracking-widest text-haiku-mint uppercase mb-3">
+                Plataforma
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.15] mb-4">
+                Todo lo que tu equipo comercial necesita,
+                <br className="hidden sm:block" /> en un solo lugar
+              </h2>
+              <p className="text-lg text-gray-400 max-w-xl mx-auto">
+                Haiku Fin no es solo un bot. Es tu plataforma completa de gestión comercial.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {features.map((f, i) => (
+              <AnimatedSection key={f.title} delay={i * 0.08}>
+                <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-7 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
+                  <div className="w-12 h-12 bg-haiku-mint/15 rounded-2xl flex items-center justify-center mb-4">
+                    <f.icon className="w-6 h-6 text-haiku-mint" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-white mb-2">
+                    {f.title}
+                  </h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">
+                    {f.description}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* -- PRICING -- */}
+      <section id="pricing" className="py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <AnimatedSection>
+            <div className="text-center mb-14">
+              <p className="text-sm font-semibold tracking-widest text-haiku-mint uppercase mb-3">
+                Precio
+              </p>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-haiku-black leading-[1.15] mb-4">
+                Simple. Un solo plan. Todo ilimitado.
+              </h2>
+              <p className="text-lg text-gray-600 max-w-xl mx-auto">
+                Sin sorpresas, sin planes confusos. Solo lo que necesitás para vender más.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="max-w-2xl mx-auto">
+            {/* Plan card */}
+            <AnimatedSection delay={0.1}>
+              <div className="bg-white rounded-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] border-2 border-haiku-mint overflow-hidden">
+                <div className="p-7 pb-6">
+                  <h3 className="font-display text-xl font-bold text-haiku-black mb-1">
+                    Plan Haiku Fin
+                  </h3>
+                  <p className="text-sm text-gray-500 italic mb-5">
+                    &quot;Solo danos tu WhatsApp. Nosotros configuramos todo.&quot;
+                  </p>
+                  <div className="flex items-baseline gap-1 mb-6">
+                    <span className="text-sm text-gray-500">S/</span>
+                    <span className="font-display text-5xl font-bold text-haiku-black">500</span>
+                    <span className="text-gray-500">/mes</span>
+                  </div>
+                  <ul className="space-y-3 mb-6">
+                    {planFeatures.map((feat) => (
+                      <li key={feat} className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-haiku-mint flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                        <span className="text-sm leading-relaxed">{feat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={WA_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-center px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,168,107,0.3)] transition-all"
+                  >
+                    Escríbenos por WhatsApp
+                  </a>
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Consumption costs */}
+            <AnimatedSection delay={0.2}>
+              <div className="mt-8 bg-white rounded-[24px] shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-7">
+                <h4 className="font-display text-lg font-bold text-haiku-black mb-1">
+                  El uso se paga como la luz
+                </h4>
+                <p className="text-sm text-gray-500 mb-5">
+                  Según lo que consumas. Transparente y sin sorpresas.
+                </p>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-gray-200">
+                        <th className="text-left py-3 font-semibold text-haiku-black">Concepto</th>
+                        <th className="text-right py-3 font-semibold text-haiku-black">Por unidad</th>
+                        <th className="text-right py-3 font-semibold text-haiku-black">x1,000/mes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {consumptionCosts.map((c) => (
+                        <tr key={c.concept} className="border-b border-gray-100">
+                          <td className="py-3 text-gray-600">{c.concept}</td>
+                          <td className="py-3 text-right text-gray-600">{c.unit}</td>
+                          <td className="py-3 text-right font-semibold text-haiku-black">{c.bulk}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                <div className="mt-5 p-4 bg-haiku-mint/5 rounded-2xl">
+                  <p className="text-sm text-gray-600">
+                    <span className="font-semibold text-haiku-black">Ejemplo: </span>
+                    Plan + 1,000 conversaciones IA + 1,000 campañas masivas ={' '}
+                    <span className="font-bold text-haiku-mint">~S/ 824/mes</span>
+                  </p>
+                </div>
+
+                <p className="text-xs text-gray-400 mt-4">
+                  Las plantillas se pagan directamente a Meta a través de nuestra plataforma.
+                </p>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* -- FAQ -- */}
+      <section className="py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="grid lg:grid-cols-[0.4fr_0.6fr] gap-12 lg:gap-20">
+            <AnimatedSection>
+              <div>
+                <p className="text-sm font-semibold tracking-widest text-haiku-mint uppercase mb-3">
+                  FAQ
+                </p>
+                <h2 className="font-display text-3xl sm:text-4xl font-bold text-haiku-black leading-[1.15] mb-4">
+                  Preguntas frecuentes
+                </h2>
+                <p className="text-gray-600 mb-6">
+                  Todo lo que necesitás saber antes de empezar con Haiku Fin.
+                </p>
+                <a
+                  href={WA_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-haiku-mint text-white font-semibold rounded-full hover:bg-[#009160] transition-colors"
+                >
+                  Escríbenos por WhatsApp
+                  <MessageCircle className="w-4 h-4" />
+                </a>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.1}>
+              <div className="divide-y divide-gray-200">
+                {faqs.map((faq, i) => (
+                  <div key={i}>
+                    <button
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      className="w-full flex items-center justify-between py-6 text-left"
+                    >
+                      <span className="font-semibold text-haiku-black text-base lg:text-lg pr-4">
+                        {faq.question}
+                      </span>
+                      <ChevronDown
+                        className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 ${
+                          openFaq === i ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    <div
+                      className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                        openFaq === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <p className="text-gray-600 leading-relaxed pb-6">{faq.answer}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* -- FINAL CTA -- */}
+      <section className="py-16 lg:py-20 bg-haiku-black relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(0,168,107,0.15)_0%,transparent_70%)] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative text-center">
+          <AnimatedSection>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.15] mb-5">
+              Tu próximo cliente ya te escribió.
+              <br className="hidden sm:block" />{' '}
+              <span className="text-haiku-mint">¿Quién le va a responder?</span>
+            </h2>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.1}>
+            <p className="text-lg text-gray-400 max-w-xl mx-auto mb-10">
+              Dejá que la IA filtre. Tus analistas que cierren.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection delay={0.2}>
+            <a
+              href={WA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-haiku-mint text-white text-lg font-semibold rounded-full hover:bg-[#009160] hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(0,168,107,0.3)] transition-all"
+            >
+              Escríbenos por WhatsApp
+              <MessageCircle className="w-5 h-5" />
+            </a>
+          </AnimatedSection>
+        </div>
+      </section>
     </>
   );
 }
