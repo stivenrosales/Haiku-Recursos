@@ -41,7 +41,7 @@ export default async function PropuestaPage({
   if (!propuesta) notFound();
 
   const vencida = new Date() > new Date(propuesta.vigenciaHasta);
-  const servicios = propuesta.servicios as Servicio[];
+  const servicios = propuesta.servicios as unknown as Servicio[];
 
   if (vencida) {
     return (
