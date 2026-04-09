@@ -301,22 +301,31 @@ export function FinancierasContent() {
             </div>
           </AnimatedSection>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="max-w-2xl mx-auto">
             {steps.map((step, i) => (
               <AnimatedSection key={step.number} delay={i * 0.1}>
-                <div className="bg-white rounded-[24px] p-7 shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-[0_8px_40px_rgba(0,0,0,0.1)] transition-all h-full">
-                  <span className="text-sm font-bold text-haiku-mint/40 font-display">
-                    {step.number}
-                  </span>
-                  <div className="w-12 h-12 bg-haiku-mint/10 rounded-2xl flex items-center justify-center mt-3 mb-4">
-                    <step.icon className="w-6 h-6 text-haiku-mint" />
+                <div className="flex gap-6">
+                  {/* Timeline line + dot */}
+                  <div className="flex flex-col items-center">
+                    <div className="w-12 h-12 bg-haiku-mint rounded-2xl flex items-center justify-center shrink-0 shadow-[0_4px_16px_rgba(0,168,107,0.3)]">
+                      <step.icon className="w-6 h-6 text-white" />
+                    </div>
+                    {i < steps.length - 1 && (
+                      <div className="w-0.5 flex-1 bg-haiku-mint/20 mt-2" />
+                    )}
                   </div>
-                  <h3 className="font-display text-lg font-bold text-haiku-black mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">
-                    {step.description}
-                  </p>
+                  {/* Content */}
+                  <div className={i < steps.length - 1 ? 'pb-10' : ''}>
+                    <span className="text-xs font-bold text-haiku-mint uppercase tracking-widest">
+                      Paso {step.number}
+                    </span>
+                    <h3 className="font-display text-xl font-bold text-haiku-black mt-1 mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-500 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}
@@ -345,21 +354,231 @@ export function FinancierasContent() {
           </AnimatedSection>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((f, i) => (
-              <AnimatedSection key={f.title} delay={i * 0.08}>
-                <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-7 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
-                  <div className="w-12 h-12 bg-haiku-mint/15 rounded-2xl flex items-center justify-center mb-4">
-                    <f.icon className="w-6 h-6 text-haiku-mint" />
+            {/* Conversaciones en vivo */}
+            <AnimatedSection delay={0}>
+              <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-5 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
+                {/* Mini mockup: chat inbox */}
+                <div className="rounded-xl overflow-hidden mb-4 bg-[#0a0a0a] border border-white/10">
+                  <div className="flex h-[180px]">
+                    {/* Sidebar */}
+                    <div className="w-[72px] bg-[#171717] border-r border-white/10 p-2 space-y-3 flex flex-col items-center pt-3">
+                      <div className="w-7 h-7 rounded-lg bg-haiku-mint/20 flex items-center justify-center"><MessageCircle className="w-3.5 h-3.5 text-haiku-mint" /></div>
+                      <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center"><Users className="w-3.5 h-3.5 text-gray-500" /></div>
+                      <div className="w-7 h-7 rounded-lg bg-white/5 flex items-center justify-center"><BarChart3 className="w-3.5 h-3.5 text-gray-500" /></div>
+                    </div>
+                    {/* Chat list */}
+                    <div className="w-[120px] border-r border-white/10 p-2 space-y-1.5">
+                      <div className="rounded-lg bg-haiku-mint/10 p-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-5 h-5 rounded-full bg-haiku-mint/30 shrink-0" />
+                          <div className="w-12 h-2 rounded bg-white/30" />
+                        </div>
+                        <div className="w-16 h-1.5 rounded bg-white/10 mt-1 ml-6" />
+                      </div>
+                      <div className="rounded-lg p-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-5 h-5 rounded-full bg-blue-500/30 shrink-0" />
+                          <div className="w-10 h-2 rounded bg-white/20" />
+                        </div>
+                        <div className="w-14 h-1.5 rounded bg-white/10 mt-1 ml-6" />
+                      </div>
+                      <div className="rounded-lg p-1.5">
+                        <div className="flex items-center gap-1.5">
+                          <div className="w-5 h-5 rounded-full bg-amber-500/30 shrink-0" />
+                          <div className="w-8 h-2 rounded bg-white/20" />
+                        </div>
+                        <div className="w-12 h-1.5 rounded bg-white/10 mt-1 ml-6" />
+                      </div>
+                    </div>
+                    {/* Chat messages */}
+                    <div className="flex-1 p-2 flex flex-col justify-end gap-1.5">
+                      <div className="self-start bg-white/10 rounded-lg px-2 py-1 max-w-[80%]">
+                        <div className="w-20 h-1.5 rounded bg-white/20" />
+                        <div className="w-14 h-1.5 rounded bg-white/10 mt-1" />
+                      </div>
+                      <div className="self-end bg-haiku-mint/20 rounded-lg px-2 py-1 max-w-[80%]">
+                        <div className="w-24 h-1.5 rounded bg-haiku-mint/30" />
+                        <div className="w-16 h-1.5 rounded bg-haiku-mint/15 mt-1" />
+                      </div>
+                      <div className="self-start bg-white/10 rounded-lg px-2 py-1">
+                        <div className="w-16 h-1.5 rounded bg-white/20" />
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="font-display text-lg font-bold text-white mb-2">
-                    {f.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">
-                    {f.description}
-                  </p>
                 </div>
-              </AnimatedSection>
-            ))}
+                <h3 className="font-display text-lg font-bold text-white mb-1">Conversaciones en vivo</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">Mirá cada conversación de la IA con los leads en tiempo real. El analista puede intervenir cuando quiera.</p>
+              </div>
+            </AnimatedSection>
+
+            {/* Asignación de analistas */}
+            <AnimatedSection delay={0.08}>
+              <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-5 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
+                {/* Mini mockup: leads table with assignment */}
+                <div className="rounded-xl overflow-hidden mb-4 bg-[#0a0a0a] border border-white/10 p-3">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="w-12 h-2 rounded bg-white/20" />
+                    <div className="flex gap-1">
+                      <div className="px-2 py-0.5 rounded-full bg-haiku-mint/20 w-14 h-4" />
+                      <div className="px-2 py-0.5 rounded-full bg-white/10 w-12 h-4" />
+                    </div>
+                  </div>
+                  {[
+                    { color: 'bg-teal-500/30', status: 'bg-emerald-500', name: 'w-16', analyst: 'Carlos M.' },
+                    { color: 'bg-blue-500/30', status: 'bg-blue-500', name: 'w-12', analyst: 'Ana R.' },
+                    { color: 'bg-amber-500/30', status: 'bg-amber-500', name: 'w-14', analyst: 'Carlos M.' },
+                    { color: 'bg-violet-500/30', status: 'bg-violet-500', name: 'w-10', analyst: 'Luis P.' },
+                  ].map((row, j) => (
+                    <div key={j} className="flex items-center gap-2 py-2 border-b border-white/5 last:border-0">
+                      <div className={`w-6 h-6 rounded-full ${row.color} shrink-0`} />
+                      <div className={`${row.name} h-2 rounded bg-white/20 flex-shrink-0`} />
+                      <div className="flex-1" />
+                      <div className={`w-2 h-2 rounded-full ${row.status}`} />
+                      <span className="text-[9px] text-gray-400 font-medium">{row.analyst}</span>
+                    </div>
+                  ))}
+                </div>
+                <h3 className="font-display text-lg font-bold text-white mb-1">Asignación de analistas</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">Cada lead precalificado se asigna automáticamente al analista correspondiente.</p>
+              </div>
+            </AnimatedSection>
+
+            {/* Mensajes masivos */}
+            <AnimatedSection delay={0.16}>
+              <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-5 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
+                {/* Mini mockup: campaign wizard */}
+                <div className="rounded-xl overflow-hidden mb-4 bg-[#0a0a0a] border border-white/10 p-3">
+                  {/* Step indicator */}
+                  <div className="flex items-center gap-1 mb-3">
+                    <div className="px-2 py-1 rounded-full bg-haiku-mint text-[8px] text-white font-bold">1 Mensaje</div>
+                    <ChevronDown className="w-3 h-3 text-gray-600 -rotate-90" />
+                    <div className="px-2 py-1 rounded-full bg-white/10 text-[8px] text-gray-500 font-bold">2 Destino</div>
+                    <ChevronDown className="w-3 h-3 text-gray-600 -rotate-90" />
+                    <div className="px-2 py-1 rounded-full bg-white/10 text-[8px] text-gray-500 font-bold">3 Enviar</div>
+                  </div>
+                  {/* Template cards */}
+                  <div className="grid grid-cols-2 gap-1.5 mb-2">
+                    <div className="rounded-lg border-2 border-haiku-mint bg-haiku-mint/5 p-2">
+                      <div className="w-8 h-1.5 rounded bg-haiku-mint/30 mb-1" />
+                      <div className="w-full h-1 rounded bg-white/10" />
+                      <div className="w-3/4 h-1 rounded bg-white/10 mt-0.5" />
+                    </div>
+                    <div className="rounded-lg border border-white/10 p-2">
+                      <div className="w-10 h-1.5 rounded bg-white/15 mb-1" />
+                      <div className="w-full h-1 rounded bg-white/10" />
+                      <div className="w-2/3 h-1 rounded bg-white/10 mt-0.5" />
+                    </div>
+                  </div>
+                  {/* WhatsApp preview bubble */}
+                  <div className="bg-[#d9fdd3] rounded-lg p-2 ml-4">
+                    <div className="w-20 h-1 rounded bg-black/10" />
+                    <div className="w-16 h-1 rounded bg-black/10 mt-0.5" />
+                    <div className="w-6 h-1 rounded bg-black/5 mt-1 ml-auto" />
+                  </div>
+                </div>
+                <h3 className="font-display text-lg font-bold text-white mb-1">Mensajes masivos</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">Espacio dedicado para que el equipo comercial lance campañas con plantillas aprobadas por Meta.</p>
+              </div>
+            </AnimatedSection>
+
+            {/* Dashboard de campañas */}
+            <AnimatedSection delay={0.24}>
+              <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-5 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
+                {/* Mini mockup: dashboard with charts */}
+                <div className="rounded-xl overflow-hidden mb-4 bg-[#0a0a0a] border border-white/10 p-3">
+                  {/* KPI cards */}
+                  <div className="grid grid-cols-3 gap-1.5 mb-3">
+                    {[
+                      { label: 'Leads', value: '847', color: 'text-teal-400' },
+                      { label: 'Pre-calif.', value: '63%', color: 'text-emerald-400' },
+                      { label: 'Desembolso', value: '28%', color: 'text-violet-400' },
+                    ].map((kpi) => (
+                      <div key={kpi.label} className="bg-white/5 rounded-lg p-2 text-center">
+                        <p className={`text-sm font-bold ${kpi.color}`}>{kpi.value}</p>
+                        <p className="text-[8px] text-gray-500">{kpi.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Mini bar chart */}
+                  <div className="flex items-end gap-1 h-[60px] px-1">
+                    {[40, 65, 50, 80, 70, 90, 60, 75, 85, 55].map((h, j) => (
+                      <div
+                        key={j}
+                        className="flex-1 bg-gradient-to-t from-haiku-mint/60 to-haiku-mint/20 rounded-t"
+                        style={{ height: `${h}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <h3 className="font-display text-lg font-bold text-white mb-1">Dashboard de campañas</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">Cuántas personas llegan, cuántas precalifican, cuántas se pierden. Métricas en tiempo real.</p>
+              </div>
+            </AnimatedSection>
+
+            {/* Etiquetas personalizables */}
+            <AnimatedSection delay={0.32}>
+              <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-5 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
+                {/* Mini mockup: tags/labels management */}
+                <div className="rounded-xl overflow-hidden mb-4 bg-[#0a0a0a] border border-white/10 p-3">
+                  <div className="space-y-2">
+                    {[
+                      { label: 'Precalificado', color: 'bg-emerald-500', count: '124' },
+                      { label: 'Docs pendientes', color: 'bg-amber-500', count: '67' },
+                      { label: 'En evaluación', color: 'bg-blue-500', count: '45' },
+                      { label: 'Aprobado', color: 'bg-violet-500', count: '38' },
+                      { label: 'Perdido', color: 'bg-red-500', count: '89' },
+                    ].map((tag) => (
+                      <div key={tag.label} className="flex items-center gap-2">
+                        <div className={`w-2.5 h-2.5 rounded-full ${tag.color}`} />
+                        <span className="text-[10px] text-gray-300 flex-1">{tag.label}</span>
+                        <span className="text-[10px] text-gray-500 font-medium">{tag.count}</span>
+                        <div className="w-16 h-1.5 rounded-full bg-white/10">
+                          <div
+                            className={`h-full rounded-full ${tag.color}/60`}
+                            style={{ width: `${(parseInt(tag.count) / 124) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <h3 className="font-display text-lg font-bold text-white mb-1">Etiquetas personalizables</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">Clasificá leads como quieras: interesado, precalificado, documentos pendientes, perdido. Todo gestionable.</p>
+              </div>
+            </AnimatedSection>
+
+            {/* IA que conversa */}
+            <AnimatedSection delay={0.4}>
+              <div className="bg-white/[0.06] backdrop-blur-sm rounded-[24px] p-5 border border-white/[0.08] hover:-translate-y-1 hover:bg-white/[0.1] transition-all h-full">
+                {/* Mini mockup: AI conversation with actions */}
+                <div className="rounded-xl overflow-hidden mb-4 bg-[#0a0a0a] border border-white/10 p-3 space-y-2">
+                  {/* User message */}
+                  <div className="self-start bg-white/10 rounded-lg px-2.5 py-1.5 max-w-[85%]">
+                    <p className="text-[9px] text-gray-300">Hola, quiero info sobre crédito hipotecario</p>
+                  </div>
+                  {/* Bot response */}
+                  <div className="self-end bg-haiku-mint/15 rounded-lg px-2.5 py-1.5 max-w-[85%] ml-auto border border-haiku-mint/20">
+                    <p className="text-[9px] text-gray-300">Con gusto te ayudo. Necesito verificar algunos datos. ¿Me compartes tu DNI?</p>
+                  </div>
+                  {/* User sends doc */}
+                  <div className="self-start bg-white/10 rounded-lg px-2.5 py-1.5 flex items-center gap-1.5">
+                    <div className="w-5 h-6 rounded bg-blue-500/20 flex items-center justify-center">
+                      <span className="text-[6px] text-blue-400 font-bold">PDF</span>
+                    </div>
+                    <span className="text-[9px] text-gray-400">dni_frente.pdf</span>
+                  </div>
+                  {/* Bot action */}
+                  <div className="flex items-center gap-1.5 px-2 py-1 bg-haiku-mint/10 rounded-lg border border-haiku-mint/20">
+                    <div className="w-3.5 h-3.5 rounded-full bg-haiku-mint/30 flex items-center justify-center">
+                      <Check className="w-2 h-2 text-haiku-mint" />
+                    </div>
+                    <span className="text-[8px] text-haiku-mint font-medium">Consultando Equifax...</span>
+                  </div>
+                </div>
+                <h3 className="font-display text-lg font-bold text-white mb-1">IA que conversa, no que recita</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">No es un bot de respuestas estáticas. Conversa, agenda, consulta Equifax, guarda documentos y toma decisiones.</p>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
