@@ -132,7 +132,7 @@ const features = [
 const planFeatures = [
   'Agente IA en WhatsApp 24/7',
   'Precalificación automática de leads',
-  'Consultas a Equifax',
+  'Consultas a Equifax (usamos tu cuenta existente)',
   'Recepción y almacenamiento de documentos',
   'Seguimientos automáticos',
   'Plataforma completa (conversaciones, asignación, etiquetas, dashboard)',
@@ -153,7 +153,7 @@ const faqs = [
   {
     question: '¿Qué necesito para empezar?',
     answer:
-      'Solo tu número de WhatsApp Business. Nosotros nos encargamos de toda la configuración técnica, integración con Equifax y capacitación de tu equipo.',
+      'Solo tu número de WhatsApp Business y acceso a tu cuenta de Equifax. Nosotros nos encargamos de toda la configuración técnica y capacitación de tu equipo. Las consultas a Equifax corren por tu cuenta existente — no hay costo adicional por nuestra parte.',
   },
   {
     question: '¿La IA realmente conversa o solo manda respuestas automáticas?',
