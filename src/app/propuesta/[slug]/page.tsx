@@ -57,7 +57,7 @@ export default async function PropuestaPage({
               month: 'long',
               year: 'numeric',
             })}
-            . Contactanos para una nueva propuesta.
+            . Contáctanos para una nueva propuesta.
           </p>
           <a
             href="https://wa.me/51994122404"

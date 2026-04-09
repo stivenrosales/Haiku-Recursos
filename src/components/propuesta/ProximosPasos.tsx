@@ -13,9 +13,9 @@ export function ProximosPasos({ vigenciaHasta }: { vigenciaHasta: Date }) {
             <span className="font-display text-sm font-bold text-haiku-mint">1</span>
           </div>
           <div>
-            <h3 className="font-display font-semibold text-haiku-black">Elegí el servicio</h3>
+            <h3 className="font-display font-semibold text-haiku-black">Elige el servicio</h3>
             <p className="font-body text-sm text-gray-600 mt-1">
-              Revisá los servicios propuestos y decidí cuál se ajusta a las necesidades del negocio.
+              Revisa los servicios propuestos y decide cuál se ajusta a las necesidades del negocio.
             </p>
           </div>
         </div>
@@ -35,7 +35,7 @@ export function ProximosPasos({ vigenciaHasta }: { vigenciaHasta: Date }) {
             <span className="font-display text-sm font-bold text-haiku-mint">3</span>
           </div>
           <div>
-            <h3 className="font-display font-semibold text-haiku-black">Arrancamos</h3>
+            <h3 className="font-display font-semibold text-haiku-black">Comenzamos</h3>
             <p className="font-body text-sm text-gray-600 mt-1">
               Una vez confirmado, comenzamos con la primera reunión de planificación.
             </p>
