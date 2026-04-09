@@ -60,7 +60,7 @@ export default async function PropuestaPage({
             . Contactanos para una nueva propuesta.
           </p>
           <a
-            href="https://wa.me/51987654321"
+            href="https://wa.me/51994122404"
             className="inline-block mt-6 bg-haiku-mint text-white font-display font-semibold px-8 py-3 rounded-full hover:opacity-90 transition-opacity"
           >
             Contactar por WhatsApp

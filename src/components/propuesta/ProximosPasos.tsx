@@ -52,7 +52,7 @@ export function ProximosPasos({ vigenciaHasta }: { vigenciaHasta: Date }) {
       <div className="mt-8 text-center print:mt-12">
         <p className="font-body text-gray-500 mb-4">¿Listo para empezar?</p>
         <a
-          href="https://wa.me/51987654321"
+          href="https://wa.me/51994122404"
           className="inline-block bg-haiku-mint text-white font-display font-semibold px-8 py-3 rounded-full hover:opacity-90 transition-opacity print:border print:border-haiku-mint print:bg-white print:text-haiku-mint"
         >
           Contactar por WhatsApp
